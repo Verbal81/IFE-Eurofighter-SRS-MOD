@@ -1,0 +1,35 @@
+THIRD-PARTY NOTICE / DRITTANBIETER-HINWEIS
+
+DEUTSCH
+-------
+Dies ist eine inoffizielle Drittanbieter-Modifikation und steht in keiner Verbindung
+zu IndiaFoxtEcho bzw. wird nicht von IndiaFoxtEcho unterstützt.
+
+Dieser Mod enthält oder verbreitet keine vollständigen originalen IndiaFoxtEcho-
+Flugzeugdateien. Sämtliche erforderlichen Änderungen werden ausschließlich lokal
+an der beim Benutzer installierten Eurofighter-Version vorgenommen.
+
+IndiaFoxtEcho ist für diese Modifikation nicht verantwortlich und übernimmt keinen
+Support dafür. Support für diesen Mod erfolgt ausschließlich durch den Mod-Autor.
+
+ENGLISH
+-------
+This is an unofficial third-party modification and is not affiliated with or
+endorsed by IndiaFoxtEcho.
+
+This mod does not contain or redistribute complete original IndiaFoxtEcho aircraft
+files. All required modifications are generated and applied locally to the user's
+installed Eurofighter files.
+
+IndiaFoxtEcho is not responsible for this modification and does not provide support
+for it. Support for this mod is provided solely by the mod author.
+
+MICROSOFT FLIGHT SIMULATOR / SIMCONNECT
+---------------------------------------
+No Microsoft SimConnect DLL is distributed in this package. At runtime the launcher
+uses SimConnect_internal.dll from the user's own installed Microsoft Flight Simulator
+2024 copy.
+
+DCS SIMPLERADIO STANDALONE
+--------------------------
+SRS is not included in this package. A compatible user installation is required.

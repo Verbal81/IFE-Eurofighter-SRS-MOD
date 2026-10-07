@@ -1,0 +1,33 @@
+{
+  "version": "1.1m4 - Eurofighter 1.0.10",
+  "package_version": "1.0.10",
+  "targets": [
+    {
+      "path": "SimObjects/Airplanes/IndiaFoxtEcho_Eurofighter/model/EFA_interior.xml",
+      "payload": "payload/EFA_interior.xml",
+      "sha256": "4c196b24a05d959cd66b6911f549c998296094dd1ba079e46dab4fc8872a9c60",
+      "accepted_sha256": [
+        "4cc1a2fae0f75160068de5c026b5ba6b614710a991a3575e5f3ccdbf62a9f480",
+        "4c196b24a05d959cd66b6911f549c998296094dd1ba079e46dab4fc8872a9c60"
+      ]
+    },
+    {
+      "path": "SimObjects/Airplanes/IndiaFoxtEcho_Eurofighter/panel/EF2000_MFD/EF2000DEP.xml",
+      "payload": "payload/EF2000DEP.xml",
+      "sha256": "c99086e1d17fb5ab4fc6c833231e84a4da7e106cb28503fc2dffbee2313959f8",
+      "accepted_sha256": [
+        "397bc8a4141db0a85289df5ffe3b46855f52631665d1ded03c47fa9bd914f266",
+        "c99086e1d17fb5ab4fc6c833231e84a4da7e106cb28503fc2dffbee2313959f8"
+      ]
+    },
+    {
+      "path": "SimObjects/Airplanes/IndiaFoxtEcho_Eurofighter/panel/EF2000_MFD/EF2000_DEP_Control.xml",
+      "payload": "payload/EF2000_DEP_Control.xml",
+      "sha256": "2f92a033fde38a212ce00d5967689400307c86d687dc14976a90c3d9d5bfaac2",
+      "accepted_sha256": [
+        "1b539670eb6c18cbb592a2226c148a964f744556789b8683bf156f2897ce89ec",
+        "2f92a033fde38a212ce00d5967689400307c86d687dc14976a90c3d9d5bfaac2"
+      ]
+    }
+  ]
+}

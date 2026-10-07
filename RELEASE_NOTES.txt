@@ -1,0 +1,29 @@
+IFE Eurofighter SRS MOD v1.1m4
+
+Release highlights
+------------------
+- Clean installation from locally installed, verified IndiaFoxtEcho Eurofighter 1.0.10 files.
+- Semantic patch generation: 3/3 expected aircraft outputs verified.
+- No complete original IndiaFoxtEcho aircraft XML files are distributed.
+- Transactional local backup, installation verification and rollback protection.
+- Verified uninstall restores all three supported IFE XML files plus layout.json.
+- DCS SimpleRadio Standalone 2.4.1.0 CLIENT integration.
+- Automatic SRS and EF-SRS Bridge startup.
+- 21 ENC/protocol/HOLD self-checks.
+- UHF1/UHF2, frequency, volume, active-radio, ENC/HOLD and SRS synchronization.
+- SimConnect is loaded from the user's installed MSFS 2024 copy.
+- No MSFS SDK runtime requirement.
+- No v1.1m3 runtime dependency.
+- Broader MSFS package discovery via UserCfg.opt with manual fallback.
+- SRS CLIENT auto-detection with manual CLIENT-folder fallback.
+
+Validation
+----------
+The complete install/use/uninstall cycle was successfully verified:
+original IFE files -> clean install -> working cockpit/SRS integration -> uninstall -> verified original IFE files.
+
+Compatibility
+-------------
+Microsoft Flight Simulator 2024
+IndiaFoxtEcho Eurofighter 1.0.10
+DCS SimpleRadio Standalone 2.4.1.0

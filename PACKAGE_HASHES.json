@@ -1,0 +1,26 @@
+{
+  "product": "IFE Eurofighter SRS MOD",
+  "version": "v1.1m4",
+  "status": "FINAL",
+  "files": {
+    "BUILD_INFO.json": "a9457bc539909b8ce431302da9f793e3ea5163b464fa13be91f2eabb95d9f569",
+    "GeneratePayload.ps1": "966d4dca618a85da461f2cceee885201374995f35af33ad108f52e65cc0a556e",
+    "Menu.ps1": "2b11ba27c2beebcb72a5163aaa48bf3a73f30cce1addfd480144ebd6fb8c68d0",
+    "README.md": "1d759be7f81bc3c7fe6ec816daa6589addefef4efbb6ca472245d469ecbe7446",
+    "RELEASE_NOTES.txt": "c0ccffb1e5b1998cc012bfc1827b965167741938ca46ae33bdd03f3e38c7170b",
+    "START_v1.1m4.cmd": "f05a5f433662fab18164c4e0bb8c5901e64094b7e64097c9d006ff621efeed70",
+    "SetupAndStart.ps1": "b8f48124987d00664edac2bd136a84a9dbd2c18ef75b58a33b65c04cda477ca4",
+    "THIRD_PARTY_NOTICE.txt": "69ce4aaf7239c0ec538dbae8078d53516e21376b203297a9580b7c2fb6c4283a",
+    "Uninstall.ps1": "16d09657e8b6f7e45b4adf560716cb7ba128aace3835f9c4eb4d6260cf4e1abb",
+    "aircraft/Installer.ps1": "6a1750240da157f10a4775451121dd0221c5595177fd3c81a65696b240262e4a",
+    "aircraft/manifest.json": "9cc2133606973bfa9d3648a54623ba89846dd5915cd052ee0e012cbd861c4656",
+    "patch_manifest.json": "430185786b13160209639a060dc359aad88a973a542747a1a9603292b4d8d983",
+    "runtime/Launcher.ps1": "3b2b391713acdf5716bea4f450e8a446155f95cc9010cddc696f5fdaaa8efd9a",
+    "runtime/RunBridge.ps1": "5c664ac3f9de68e6e8fd1592c17cc77cd9c20a93a1176a2bd023f121e07bc6a9",
+    "runtime/manifest.json": "9548a55d7a03d9d158d6a1b3e0fa9375da684deb358323b8f9c9bee6299bf59a",
+    "runtime/src/Bridge.cs": "e0aa8cd6a1e5ec9d4f905b28de417a0bba77e00b9978a40de748cf24f9fb0602",
+    "runtime/src/Link.cs": "249721f99ed4619bd4bfe41df81958f856a991460762f5757f5c22ca22a3bd60",
+    "runtime/src/NativeSimConnect.cs": "4e94ad87614ec160b5eaabdeec7e56e4a3d3cd7cf0f6e43a7ef9d6df951b2661",
+    "runtime/src/SrsHook.cs": "77a530e7e045531e51765cacc8195428560dd5877a09496a290b24a545c3299a"
+  }
+}

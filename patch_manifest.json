@@ -1,0 +1,1004 @@
+{
+  "format": "EFSRS semantic patch v1.1m4",
+  "supported_source": {
+    "ife_version": "1.0.10",
+    "EFA_interior.xml": "4cc1a2fae0f75160068de5c026b5ba6b614710a991a3575e5f3ccdbf62a9f480",
+    "EF2000DEP.xml": "397bc8a4141db0a85289df5ffe3b46855f52631665d1ded03c47fa9bd914f266",
+    "EF2000_DEP_Control.xml": "1b539670eb6c18cbb592a2226c148a964f744556789b8683bf156f2897ce89ec"
+  },
+  "expected_output": {
+    "EFA_interior.xml": "4c196b24a05d959cd66b6911f549c998296094dd1ba079e46dab4fc8872a9c60",
+    "EF2000DEP.xml": "c99086e1d17fb5ab4fc6c833231e84a4da7e106cb28503fc2dffbee2313959f8",
+    "EF2000_DEP_Control.xml": "2f92a033fde38a212ce00d5967689400307c86d687dc14976a90c3d9d5bfaac2"
+  },
+  "efa_component_callbacks": [
+    {
+      "component_id": "SSK_RAD1",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:MODINGSSK_Sound,bool) ! (>L:MODINGSSK_Sound,bool)",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:ElectricalACPowerAvailable,bool) if{",
+        "        1 (>L:EFSRS_SelectedRadio,number)",
+        "        3 (>L:DEP_MODE,enum)",
+        "        0 (>L:DEP_SUBMODE,enum)",
+        "        31 (>L:DEPKeypadMode,number)",
+        "        0 (>L:EFSRS_InputDigits,number)",
+        "    0 (>L:EFSRS_FreqDigits,number) 0 (>L:EFSRS_FreqCount,number)",
+        "    0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number)",
+        "    0 (>L:EFSRS_IntercomDigits,number) 0 (>L:EFSRS_IntercomCount,number)",
+        "    0 (>L:DEP_NewDigit,number) 0 (>L:DEP_KEY,number) 0 (>L:EFSRS_RequestKeyEdit,bool)",
+        "",
+        "        0 (>L:EFSRS_DigitCount,number)",
+        "        0 (>L:EFSRS_InputError,bool)",
+        "        0 (>L:EFSRS_EncKeyEdit,bool)",
+        "        0 (>L:DEP_digit_counter,number)",
+        "    }",
+        "}",
+        "els{",
+        "    3 (L:DEP_MODE, enum) != (L:ElectricalACPowerAvailable,bool) and if{ 3 (>L:DEP_MODE, enum) 0 (>L:DEP_SUBMODE, enum) 31 (>L:DEPKeypadMode) 10 (>L:DEP_Calc_mode, number) 0 (>L:DEP_digit_counter,number) } els{ 0 (>L:DEP_MODE, enum) 0 (>L:DEP_SUBMODE, enum) }",
+        "}"
+      ]
+    },
+    {
+      "component_id": "SSK_RAD2",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:MODINGSSK_Sound,bool) ! (>L:MODINGSSK_Sound,bool)",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:ElectricalACPowerAvailable,bool) if{",
+        "        2 (>L:EFSRS_SelectedRadio,number)",
+        "        4 (>L:DEP_MODE,enum)",
+        "        0 (>L:DEP_SUBMODE,enum)",
+        "        41 (>L:DEPKeypadMode,number)",
+        "        0 (>L:EFSRS_InputDigits,number)",
+        "    0 (>L:EFSRS_FreqDigits,number) 0 (>L:EFSRS_FreqCount,number)",
+        "    0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number)",
+        "    0 (>L:EFSRS_IntercomDigits,number) 0 (>L:EFSRS_IntercomCount,number)",
+        "    0 (>L:DEP_NewDigit,number) 0 (>L:DEP_KEY,number) 0 (>L:EFSRS_RequestKeyEdit,bool)",
+        "",
+        "        0 (>L:EFSRS_DigitCount,number)",
+        "        0 (>L:EFSRS_InputError,bool)",
+        "        0 (>L:EFSRS_EncKeyEdit,bool)",
+        "        0 (>L:DEP_digit_counter,number)",
+        "    }",
+        "}",
+        "els{",
+        "    4 (L:DEP_MODE, enum) != (L:ElectricalACPowerAvailable,bool) and if{ 4 (>L:DEP_MODE, enum) 0 (>L:DEP_SUBMODE, enum) 41 (>L:DEPKeypadMode) 12 (>L:DEP_Calc_mode, number) 0 (>L:DEP_digit_counter,number) } els{ 0 (>L:DEP_MODE, enum) 0 (>L:DEP_SUBMODE, enum) }",
+        "}"
+      ]
+    },
+    {
+      "component_id": "SSK_SWP",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:MODINGSSK_Sound,bool) ! (>L:MODINGSSK_Sound,bool)",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:ElectricalACPowerAvailable,bool) if{",
+        "        3 (>L:EFSRS_SelectedRadio,number)",
+        "        13 (>L:DEP_MODE,enum)",
+        "        0 (>L:DEP_SUBMODE,enum)",
+        "        131 (>L:DEPKeypadMode,number)",
+        "        0 (>L:EFSRS_InputDigits,number)",
+        "    0 (>L:EFSRS_FreqDigits,number) 0 (>L:EFSRS_FreqCount,number)",
+        "    0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number)",
+        "    0 (>L:EFSRS_IntercomDigits,number) 0 (>L:EFSRS_IntercomCount,number)",
+        "    0 (>L:DEP_NewDigit,number) 0 (>L:DEP_KEY,number) 0 (>L:EFSRS_RequestKeyEdit,bool)",
+        "",
+        "        0 (>L:EFSRS_DigitCount,number)",
+        "        0 (>L:EFSRS_InputError,bool)",
+        "        0 (>L:EFSRS_EncKeyEdit,bool)",
+        "        0 (>L:DEP_digit_counter,number)",
+        "    }",
+        "}",
+        "els{",
+        "    13 (L:DEP_MODE, enum) != (L:ElectricalACPowerAvailable,bool) and if{ 13 (>L:DEP_MODE, enum) 0 (>L:DEP_SUBMODE, enum) } els{ 0 (>L:DEP_MODE, enum) 0 (>L:DEP_SUBMODE, enum) }",
+        "}"
+      ]
+    },
+    {
+      "component_id": "SSK_CHD",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:MODINGSSK_Sound,bool) ! (>L:MODINGSSK_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "    0 (>L:EFSRS_Mode,bool)",
+        "    0 (>L:EFSRS_InputDigits,number)",
+        "    0 (>L:EFSRS_FreqDigits,number) 0 (>L:EFSRS_FreqCount,number)",
+        "    0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number)",
+        "    0 (>L:EFSRS_IntercomDigits,number) 0 (>L:EFSRS_IntercomCount,number)",
+        "    0 (>L:DEP_NewDigit,number) 0 (>L:DEP_KEY,number) 0 (>L:EFSRS_RequestKeyEdit,bool)",
+        "",
+        "    0 (>L:EFSRS_DigitCount,number)",
+        "    0 (>L:EFSRS_InputError,bool)",
+        "    0 (>L:EFSRS_EncKeyEdit,bool)",
+        "    (L:EFSRS_PrevDEPMode,enum) (>L:DEP_MODE,enum)",
+        "    (L:EFSRS_PrevDEPSubmode,enum) (>L:DEP_SUBMODE,enum)",
+        "    (L:EFSRS_PrevKeypadMode,number) (>L:DEPKeypadMode,number)",
+        "    (L:EFSRS_PrevCalcMode,number) (>L:DEP_Calc_mode,number)",
+        "    0 (>L:DEP_digit_counter,number)",
+        "}",
+        "els{",
+        "    (L:DEP_MODE,enum) (>L:EFSRS_PrevDEPMode,enum)",
+        "    (L:DEP_SUBMODE,enum) (>L:EFSRS_PrevDEPSubmode,enum)",
+        "    (L:DEPKeypadMode,number) (>L:EFSRS_PrevKeypadMode,number)",
+        "    (L:DEP_Calc_mode,number) (>L:EFSRS_PrevCalcMode,number)",
+        "    (L:EFSRS_Radio1Freq,number) 225 &lt; (L:EFSRS_Radio1Freq,number) 399.975 &gt; or if{ 251.000 (>L:EFSRS_Radio1Freq,number) }",
+        "    (L:EFSRS_Radio2Freq,number) 225 &lt; (L:EFSRS_Radio2Freq,number) 399.975 &gt; or if{ 305.000 (>L:EFSRS_Radio2Freq,number) }",
+        "    (L:EFSRS_ActiveRadio,number) 1 &lt; (L:EFSRS_ActiveRadio,number) 2 &gt; or if{ 1 (>L:EFSRS_ActiveRadio,number) }",
+        "    (L:EFSRS_Initialized,bool) ! if{",
+        "        80 (>L:EFSRS_Radio1Vol,number)",
+        "        80 (>L:EFSRS_Radio2Vol,number)",
+        "        80 (>L:EFSRS_IntercomVol,number)",
+        "        1 (>L:EFSRS_IntercomChannel,number)",
+        "        0 (>L:EFSRS_Radio1Enc,bool)",
+        "        0 (>L:EFSRS_Radio2Enc,bool)",
+        "        1 (>L:EFSRS_Radio1EncKey,number)",
+        "        1 (>L:EFSRS_Radio2EncKey,number)",
+        "        1 (>L:EFSRS_Initialized,bool)",
+        "    }",
+        "    1 (>L:EFSRS_Mode,bool)",
+        "    1 (>L:EFSRS_SelectedRadio,number)",
+        "    3 (>L:DEP_MODE,enum)",
+        "    0 (>L:DEP_SUBMODE,enum)",
+        "    31 (>L:DEPKeypadMode,number)",
+        "    0 (>L:EFSRS_InputDigits,number)",
+        "    0 (>L:EFSRS_FreqDigits,number) 0 (>L:EFSRS_FreqCount,number)",
+        "    0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number)",
+        "    0 (>L:EFSRS_IntercomDigits,number) 0 (>L:EFSRS_IntercomCount,number)",
+        "    0 (>L:DEP_NewDigit,number) 0 (>L:DEP_KEY,number) 0 (>L:EFSRS_RequestKeyEdit,bool)",
+        "",
+        "    0 (>L:EFSRS_DigitCount,number)",
+        "    0 (>L:EFSRS_InputError,bool)",
+        "    0 (>L:EFSRS_EncKeyEdit,bool)",
+        "    0 (>L:DEP_digit_counter,number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad00",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:EFSRS_SelectedRadio,number) 1 == if{ (L:EFSRS_Radio1Vol,number) 5 - 0 max (>L:EFSRS_Radio1Vol,number) }",
+        "    (L:EFSRS_SelectedRadio,number) 2 == if{ (L:EFSRS_Radio2Vol,number) 5 - 0 max (>L:EFSRS_Radio2Vol,number) }",
+        "    (L:EFSRS_SelectedRadio,number) 3 == if{ (L:EFSRS_IntercomVol,number) 5 - 0 max (>L:EFSRS_IntercomVol,number) }",
+        "    (L:EFSRS_VolumeSeq,number) 1 + (>L:EFSRS_VolumeSeq,number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad01",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or if{",
+        "        (L:EFSRS_SelectedRadio,number) (>L:EFSRS_ActiveRadio,number)",
+        "        (L:EFSRS_ActiveSeq,number) 1 + (>L:EFSRS_ActiveSeq,number)",
+        "    }",
+        "}",
+        "els{",
+        "    (L:DEP_MODE, enum) 7 == if{ (L:INTROLLine, enum) 1 - (>L:INTROLLine, enum) }",
+        "    (L:DEP_MODE, enum) 11 == if{ (L:XPDRROLLine, enum) 1 - (>L:XPDRROLLine, enum) }",
+        "    (L:DEPKeypadMode,number) 120 &gt; (L:DEPKeypadMode,number) 125 &lt; and (L:DEPKeypadMode,number) 1221 == or if{ (L:DEP_Marker_Bingo,enum) 1 - (>L:DEP_Marker_Bingo,enum) 0 (>L:DEP_digit_counter,number) }",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad02",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:EFSRS_SelectedRadio,number) 1 == if{",
+        "        (L:EFSRS_Radio1Enc,bool) ! (>L:EFSRS_Radio1Enc,bool)",
+        "        (L:EFSRS_EncryptionSeq,number) 1 + (>L:EFSRS_EncryptionSeq,number)",
+        "    }",
+        "    (L:EFSRS_SelectedRadio,number) 2 == if{",
+        "        (L:EFSRS_Radio2Enc,bool) ! (>L:EFSRS_Radio2Enc,bool)",
+        "        (L:EFSRS_EncryptionSeq,number) 1 + (>L:EFSRS_EncryptionSeq,number)",
+        "    }",
+        "}",
+        "els{",
+        "    (L:DEP_MODE, enum) 7 == if{ (L:INTROLLine, enum) 1 + (>L:INTROLLine, enum) }",
+        "    (L:DEP_MODE, enum) 11 == if{ (L:XPDRROLLine, enum) 1 + (>L:XPDRROLLine, enum) }",
+        "    (L:DEPKeypadMode,number) 120 &gt; (L:DEPKeypadMode,number) 125 &lt; and (L:DEPKeypadMode,number) 1221 == or if{ (L:DEP_Marker_Bingo,enum) 1 + (>L:DEP_Marker_Bingo,enum) 0 (>L:DEP_digit_counter,number) }",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad03",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:EFSRS_SelectedRadio,number) 1 == if{ (L:EFSRS_Radio1Vol,number) 5 + 100 min (>L:EFSRS_Radio1Vol,number) }",
+        "    (L:EFSRS_SelectedRadio,number) 2 == if{ (L:EFSRS_Radio2Vol,number) 5 + 100 min (>L:EFSRS_Radio2Vol,number) }",
+        "    (L:EFSRS_SelectedRadio,number) 3 == if{ (L:EFSRS_IntercomVol,number) 5 + 100 min (>L:EFSRS_IntercomVol,number) }",
+        "    (L:EFSRS_VolumeSeq,number) 1 + (>L:EFSRS_VolumeSeq,number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad11",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "1 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    1 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad12",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "2 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    2 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad13",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "3 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    3 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad21",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "4 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    4 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad22",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "5 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    5 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad23",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "6 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    6 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad31",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "7 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    7 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad32",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "8 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    8 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad33",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "9 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    9 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad40",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "11 (>L:DEP_KEY,number)",
+        "}",
+        "els{",
+        "    11 (>L:DEP_KEY, enum)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad41",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "1 (>L:EFSRS_RequestKeyEdit,bool)",
+        "}",
+        "els{",
+        "    0 (>L:GPS_Keypad_Negative_Longitude, bool)",
+        "    0 (>L:NEW_TACAN_channelY, bool)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad42",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "0 (>L:DEP_Digit,number) 1 (>L:DEP_NewDigit,number)",
+        "}",
+        "els{",
+        "    1 (>L:DEP_NewDigit, number)",
+        "    0 (>L:DEP_Digit, number)",
+        "}",
+        "}"
+      ]
+    },
+    {
+      "component_id": "Keypad43",
+      "new_callback_lines": [
+        "<CallbackCode><Code>",
+        "(L:ROLKeypad_Sound,bool) ! (>L:ROLKeypad_Sound,bool)",
+        "(L:ElectricalACPowerAvailable,bool) if{",
+        "(L:EFSRS_Mode,bool) if{",
+        "12 (>L:DEP_KEY,number)",
+        "}",
+        "els{",
+        "    12 (>L:DEP_KEY, enum)",
+        "}",
+        "}"
+      ]
+    }
+  ],
+  "dep_line_ops": [
+    {
+      "start_line": 128,
+      "delete_count": 1,
+      "insert_lines": [
+        "<Element id=\"EFSRS_ACTIVE_UHF1_DWP\">"
+      ]
+    },
+    {
+      "start_line": 130,
+      "delete_count": 1,
+      "insert_lines": [
+        "(A:GPS WP PREV VALID, bool) ! (L:EFSRS_ActiveRadio,number) 2 != and"
+      ]
+    },
+    {
+      "start_line": 139,
+      "delete_count": 1,
+      "insert_lines": [
+        "<GaugeString>UHF1</GaugeString>"
+      ]
+    },
+    {
+      "start_line": 145,
+      "delete_count": 0,
+      "insert_lines": [
+        "",
+        "<Element id=\"EFSRS_ACTIVE_UHF2_DWP\">",
+        "<Visibility>",
+        "(A:GPS WP PREV VALID, bool) ! (L:EFSRS_ActiveRadio,number) 2 == and",
+        "</Visibility>",
+        "<FloatPosition>36,401</FloatPosition>",
+        "<GaugeText>",
+        "<Bright>True</Bright>",
+        "<Bold>False</Bold>",
+        "<FontFace>5x7 DOT Matrix</FontFace>",
+        " <FontColor>#D2F573</FontColor>",
+        "<FontHeight>18</FontHeight>",
+        "<GaugeString>UHF2</GaugeString>",
+        "<HorizontalAlign>CENTER</HorizontalAlign>",
+        "<Size>160,100</Size>",
+        "<Transparent>True</Transparent>",
+        "</GaugeText>",
+        "</Element>",
+        "",
+        ""
+      ]
+    },
+    {
+      "start_line": 180,
+      "delete_count": 0,
+      "insert_lines": [
+        ""
+      ]
+    },
+    {
+      "start_line": 770,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:DEPKeypadMode,number) 131 == and (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 2631,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:DEPKeypadMode,number) 137 == and (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 2693,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:DEPKeypadMode,number) 132 == and (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 3146,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:DEPKeypadMode,number) 133 == and (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 3665,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:DEPKeypadMode,number) 134 == and (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 3705,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:DEPKeypadMode,number) 135 == and (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 4315,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:DEPKeypadMode,number) 136 == and (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 4822,
+      "delete_count": 0,
+      "insert_lines": [
+        "<Visibility>(L:EFSRS_Mode,bool) ! (L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or ! or</Visibility>"
+      ]
+    },
+    {
+      "start_line": 4858,
+      "delete_count": 0,
+      "insert_lines": [
+        "<!-- EF-SRS v0.5.2 dedicated radio display.",
+        "     IMPORTANT: this is a sibling of the native radio gauge, not inside the hidden LCD/keypad test gauge. -->",
+        "<Element id=\"EFSRS RADIO DISPLAY V052\">",
+        "<Visibility>",
+        "(L:EFSRS_Mode,bool) (L:DEP_MODE, enum) 3 == (L:DEP_MODE, enum) 4 == or (L:DEP_MODE, enum) 13 == or and",
+        "</Visibility>",
+        "",
+        "<Element id=\"EFSRS UHF1 LABEL V052\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 ==</Visibility>",
+        "<FloatPosition>28,576</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>UHF1</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS UHF2 LABEL V052\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 2 ==</Visibility>",
+        "<FloatPosition>28,576</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>UHF2</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS INTERCOM LABEL V060\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 3 ==</Visibility>",
+        "<FloatPosition>28,576</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>INTERCOM</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS UHF1 VOL V060\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 ==</Visibility>",
+        "<FloatPosition>90,576</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>VOL%((L:EFSRS_Radio1Vol,number))%!d!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>70,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS UHF2 VOL V060\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 2 ==</Visibility>",
+        "<FloatPosition>90,576</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>VOL%((L:EFSRS_Radio2Vol,number))%!d!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>70,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<!-- EF-SRS v0.7.1: active TX status independent from the viewed radio page. -->",
+        "<Element id=\"EFSRS UHF ACTIVE STATUS V071\">",
+        "<Visibility>",
+        "(L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or",
+        "(L:EFSRS_SelectedRadio,number) (L:EFSRS_ActiveRadio,number) == and",
+        "</Visibility>",
+        "<FloatPosition>166,576</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>True</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>ACT</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>45,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS UHF STANDBY STATUS V071\">",
+        "<Visibility>",
+        "(L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or",
+        "(L:EFSRS_SelectedRadio,number) (L:EFSRS_ActiveRadio,number) != and",
+        "</Visibility>",
+        "<FloatPosition>160,576</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>9</FontHeight>",
+        "<GaugeString>STBY</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>55,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS INTERCOM VOL V060\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 3 ==</Visibility>",
+        "<FloatPosition>100,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>VOL%((L:EFSRS_IntercomVol,number))%!d!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>70,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS UHF1 FREQ V052\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 ==</Visibility>",
+        "<FloatPosition>28,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>%((L:EFSRS_Radio1Freq,number))%!6.3f!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS UHF2 FREQ V052\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 2 ==</Visibility>",
+        "<FloatPosition>28,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>%((L:EFSRS_Radio2Freq,number))%!6.3f!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS INTERCOM CHANNEL V060\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 3 ==</Visibility>",
+        "<FloatPosition>28,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>CH %((L:EFSRS_IntercomChannel,number))%!d!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "",
+        "<!-- EF-SRS v0.7 encryption state. Stock SRS needs the matching UDP command extension. -->",
+        "<Element id=\"EFSRS UHF1 ENC ON V070\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_Radio1Enc,bool) and</Visibility>",
+        "<FloatPosition>120,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>9</FontHeight>",
+        "<GaugeString>ENC ON</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS UHF1 ENC OFF V070\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_Radio1Enc,bool) ! and</Visibility>",
+        "<FloatPosition>120,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>9</FontHeight>",
+        "<GaugeString>ENC OFF</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS UHF2 ENC ON V070\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 2 == (L:EFSRS_Radio2Enc,bool) and</Visibility>",
+        "<FloatPosition>120,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>9</FontHeight>",
+        "<GaugeString>ENC ON</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS UHF2 ENC OFF V070\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 2 == (L:EFSRS_Radio2Enc,bool) ! and</Visibility>",
+        "<FloatPosition>120,606</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>9</FontHeight>",
+        "<GaugeString>ENC OFF</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS UHF1 ENC KEY V070\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 ==</Visibility>",
+        "<FloatPosition>120,636</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>9</FontHeight>",
+        "<GaugeString>K%((L:EFSRS_Radio1EncKey,number))%!d!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>70,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS UHF2 ENC KEY V070\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 2 ==</Visibility>",
+        "<FloatPosition>120,636</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>9</FontHeight>",
+        "<GaugeString>K%((L:EFSRS_Radio2EncKey,number))%!d!%</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>70,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS NEW LABEL V052\">",
+        "<Visibility>(L:EFSRS_EncKeyEdit,bool) !</Visibility>",
+        "<FloatPosition>28,636</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>NEW</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS KEY EDIT LABEL V070\">",
+        "<Visibility>(L:EFSRS_EncKeyEdit,bool)</Visibility>",
+        "<FloatPosition>28,636</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>KEY</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "",
+        "<Element id=\"EFSRS NEW EMPTY V052\">",
+        "<Visibility>(L:EFSRS_DigitCount,number) 0 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 != and</Visibility>",
+        "<FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>---.---</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS KEY EMPTY V070\">",
+        "<Visibility>(L:EFSRS_EncKeyEdit,bool) (L:EFSRS_DigitCount,number) 0 == and (L:EFSRS_InputError,bool) ! and</Visibility>",
+        "<FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>---</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>80,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "",
+        "<Element id=\"EFSRS KEY INPUT V11K\">",
+        "<Visibility>(L:EFSRS_KeyCount,number) 0 &gt; (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_KeyDigits,number))%!d!</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS INTERCOM EMPTY V11K\">",
+        "<Visibility>(L:EFSRS_IntercomCount,number) 0 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 == and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>--</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS FREQ INPUT 1 V11K\">",
+        "<Visibility>(L:EFSRS_FreqCount,number) 1 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 != and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_FreqDigits,number))%!d!--.---</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS FREQ INPUT 2 V11K\">",
+        "<Visibility>(L:EFSRS_FreqCount,number) 2 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 != and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_FreqDigits,number))%!d!-.---</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS FREQ INPUT 3 V11K\">",
+        "<Visibility>(L:EFSRS_FreqCount,number) 3 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 != and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_FreqDigits,number))%!d!.---</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS FREQ INPUT 4 V11K\">",
+        "<Visibility>(L:EFSRS_FreqCount,number) 4 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 != and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_FreqDigits,number) 10 / flr)%!d!.%((L:EFSRS_FreqDigits,number) 10 %)%!01d!--</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS FREQ INPUT 5 V11K\">",
+        "<Visibility>(L:EFSRS_FreqCount,number) 5 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 != and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_FreqDigits,number) 100 / flr)%!d!.%((L:EFSRS_FreqDigits,number) 100 %)%!02d!-</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS FREQ INPUT 6 V11K\">",
+        "<Visibility>(L:EFSRS_FreqCount,number) 6 == (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 != and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_FreqDigits,number) 1000 / flr)%!d!.%((L:EFSRS_FreqDigits,number) 1000 %)%!03d!</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS INTERCOM INPUT V11K\">",
+        "<Visibility>(L:EFSRS_IntercomCount,number) 0 &gt; (L:EFSRS_InputError,bool) ! and (L:EFSRS_EncKeyEdit,bool) ! and (L:EFSRS_SelectedRadio,number) 3 == and</Visibility><FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace>",
+        "<FontColor>#D2F573</FontColor><FontHeight>13</FontHeight><GaugeString>%((L:EFSRS_IntercomDigits,number))%!d!</GaugeString>",
+        "<HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS INPUT ERROR V052\">",
+        "<Visibility>(L:EFSRS_InputError,bool)</Visibility>",
+        "<FloatPosition>28,666</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>13</FontHeight>",
+        "<GaugeString>INVALID</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>100,50</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS INPUT MARKER V11K\">",
+        "<Visibility>(L:EFSRS_InputError,bool) !</Visibility>",
+        "<Element><FloatPosition>29,684</FloatPosition><Image Name=\"DEP_Marker.bmp\"><Transparent>False</Transparent><Bright>False</Bright></Image></Element>",
+        "<Shift><Scale>10,0</Scale><Expression><Minimum>0</Minimum><Maximum>7</Maximum>",
+        "<Script>(L:EFSRS_DigitCount,number) (L:EFSRS_EncKeyEdit,bool) ! (L:EFSRS_SelectedRadio,number) 3 != and (L:EFSRS_DigitCount,number) 3 &gt;= and if{ 1 + }</Script>",
+        "</Expression></Shift></Element>",
+        "",
+        "<!-- EF-SRS v0.6.2: outer top-row volume key labels.  Keypad00 = VOL-, Keypad03 = VOL+. -->",
+        "<Element id=\"EFSRS VOL MINUS KEY LABEL V062\">",
+        "<FloatPosition>7,740</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>VOL-</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>50,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "",
+        "<Element id=\"EFSRS ACT KEY LABEL V071\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or</Visibility>",
+        "<FloatPosition>65,740</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>True</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>ACT</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>50,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<Element id=\"EFSRS ENC KEY LABEL V071\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or</Visibility>",
+        "<FloatPosition>120,740</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>ENC</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>50,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "<!-- Bottom-row second blank key is KEY only on UHF1/UHF2 SRS pages. -->",
+        "<Element id=\"EFSRS SETKEY BOTTOM LABEL V071\">",
+        "<Visibility>(L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or</Visibility>",
+        "<FloatPosition>61,978</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>True</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>12</FontHeight>",
+        "<GaugeString>KEY</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>55,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "<Element id=\"EFSRS VOL PLUS KEY LABEL V062\">",
+        "<FloatPosition>169,740</FloatPosition>",
+        "<GaugeText><Bright>True</Bright><Bold>False</Bold><FontFace>5x7 DOT Matrix</FontFace><FontColor>#D2F573</FontColor><FontHeight>11</FontHeight>",
+        "<GaugeString>VOL+</GaugeString><HorizontalAlign>LEFT</HorizontalAlign><Size>50,35</Size><Transparent>True</Transparent></GaugeText>",
+        "</Element>",
+        "",
+        "</Element>",
+        "<!-- /EF-SRS dedicated radio display (updated through v0.6.2) -->",
+        ""
+      ]
+    },
+    {
+      "start_line": 4860,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 3 == (L:DEP_MODE, enum) 4 == or (L:EFSRS_Mode,bool) (L:DEP_MODE, enum) 13 == and or"
+      ]
+    },
+    {
+      "start_line": 4866,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 31 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 4897,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 32 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 4971,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 33 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 5049,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 34 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 5085,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 41 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 5116,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 42 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 5190,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 43 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 5268,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEPKeypadMode,number) 44 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 8994,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_MODE, enum) 13 == (L:EFSRS_Mode,bool) ! and"
+      ]
+    },
+    {
+      "start_line": 9273,
+      "delete_count": 1,
+      "insert_lines": [
+        "(L:DEP_Marker,enum) 0 &gt; (L:EFSRS_Mode,bool) ! and"
+      ]
+    }
+  ],
+  "control_line_ops": [
+    {
+      "start_line": 57,
+      "delete_count": 0,
+      "insert_lines": [
+        "",
+        "<!-- EF-SRS v1.1k: one DEP event consumer, separate frequency/KEY/intercom buffers. -->",
+        "<Element id=\"EFSRS SHARED INPUT V11K\"><Select><Value>",
+        "(L:EFSRS_Mode,bool) if{",
+        "    (L:EFSRS_RequestKeyEdit,bool) if{",
+        "        (L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or if{",
+        "            1 (>L:EFSRS_EncKeyEdit,bool) 0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number)",
+        "            0 (>L:EFSRS_InputError,bool)",
+        "        }",
+        "        0 (>L:EFSRS_RequestKeyEdit,bool)",
+        "    }",
+        "    (L:DEP_NewDigit,number) 0 &gt; if{",
+        "        0 (>L:EFSRS_InputError,bool)",
+        "        (L:DEP_Digit,number) 0 &gt;= (L:DEP_Digit,number) 9 &lt;= and",
+        "        (L:DEP_Digit,number) flr (L:DEP_Digit,number) == and if{",
+        "            (L:EFSRS_EncKeyEdit,bool) if{ (L:EFSRS_KeyCount,number) 3 &lt; if{",
+        "        (L:EFSRS_KeyDigits,number) 10 * (L:DEP_Digit,number) + (>L:EFSRS_KeyDigits,number)",
+        "        (L:EFSRS_KeyCount,number) 1 + (>L:EFSRS_KeyCount,number)",
+        "    } els{ 1 (>L:EFSRS_InputError,bool) } } els{",
+        "                (L:EFSRS_SelectedRadio,number) 3 == if{ (L:EFSRS_IntercomCount,number) 2 &lt; if{",
+        "        (L:EFSRS_IntercomDigits,number) 10 * (L:DEP_Digit,number) + (>L:EFSRS_IntercomDigits,number)",
+        "        (L:EFSRS_IntercomCount,number) 1 + (>L:EFSRS_IntercomCount,number)",
+        "    } els{ 1 (>L:EFSRS_InputError,bool) } } els{",
+        "                    (L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or if{ (L:EFSRS_FreqCount,number) 6 &lt; if{",
+        "        (L:EFSRS_FreqDigits,number) 10 * (L:DEP_Digit,number) + (>L:EFSRS_FreqDigits,number)",
+        "        (L:EFSRS_FreqCount,number) 1 + (>L:EFSRS_FreqCount,number)",
+        "    } els{ 1 (>L:EFSRS_InputError,bool) } }",
+        "                }",
+        "            }",
+        "        } els{ 1 (>L:EFSRS_InputError,bool) }",
+        "        0 (>L:DEP_NewDigit,number)",
+        "    }",
+        "    (L:DEP_KEY,number) 12 == if{",
+        "        (L:EFSRS_EncKeyEdit,bool) if{",
+        "            (L:EFSRS_KeyCount,number) 0 &gt;",
+        "            (L:EFSRS_KeyDigits,number) 1 &gt;= and (L:EFSRS_KeyDigits,number) 252 &lt;= and",
+        "            (L:EFSRS_InputError,bool) ! and",
+        "            (L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or and if{",
+        "                (L:EFSRS_SelectedRadio,number) 1 == if{ (L:EFSRS_KeyDigits,number) (>L:EFSRS_Radio1EncKey,number) }",
+        "                (L:EFSRS_SelectedRadio,number) 2 == if{ (L:EFSRS_KeyDigits,number) (>L:EFSRS_Radio2EncKey,number) }",
+        "                (L:EFSRS_EncryptionSeq,number) 1 + (>L:EFSRS_EncryptionSeq,number)",
+        "                0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number) 0 (>L:EFSRS_EncKeyEdit,bool) 0 (>L:EFSRS_InputError,bool)",
+        "            } els{ 1 (>L:EFSRS_InputError,bool) }",
+        "        } els{",
+        "            (L:EFSRS_SelectedRadio,number) 3 == if{",
+        "                (L:EFSRS_IntercomCount,number) 0 &gt;",
+        "                (L:EFSRS_IntercomDigits,number) 1 &gt;= and (L:EFSRS_IntercomDigits,number) 99 &lt;= and",
+        "                (L:EFSRS_InputError,bool) ! and if{",
+        "                    (L:EFSRS_IntercomDigits,number) (>L:EFSRS_IntercomChannel,number)",
+        "                    (L:EFSRS_IntercomSeq,number) 1 + (>L:EFSRS_IntercomSeq,number)",
+        "                    0 (>L:EFSRS_IntercomDigits,number) 0 (>L:EFSRS_IntercomCount,number) 0 (>L:EFSRS_InputError,bool)",
+        "                } els{ 1 (>L:EFSRS_InputError,bool) }",
+        "            } els{",
+        "                (L:EFSRS_FreqCount,number) 6 ==",
+        "                (L:EFSRS_FreqDigits,number) 225000 &gt;= and (L:EFSRS_FreqDigits,number) 399975 &lt;= and",
+        "                (L:EFSRS_SelectedRadio,number) 1 == (L:EFSRS_SelectedRadio,number) 2 == or and",
+        "                (L:EFSRS_InputError,bool) ! and if{",
+        "                    (L:EFSRS_SelectedRadio,number) 1 == if{ (L:EFSRS_FreqDigits,number) 1000 / (>L:EFSRS_Radio1Freq,number) }",
+        "                    (L:EFSRS_SelectedRadio,number) 2 == if{ (L:EFSRS_FreqDigits,number) 1000 / (>L:EFSRS_Radio2Freq,number) }",
+        "                    (L:EFSRS_CommitSeq,number) 1 + (>L:EFSRS_CommitSeq,number)",
+        "                    0 (>L:EFSRS_FreqDigits,number) 0 (>L:EFSRS_FreqCount,number) 0 (>L:EFSRS_InputError,bool)",
+        "                } els{ 1 (>L:EFSRS_InputError,bool) }",
+        "            }",
+        "        }",
+        "        0 (>L:DEP_KEY,number)",
+        "    }",
+        "    (L:DEP_KEY,number) 11 == if{",
+        "        (L:EFSRS_EncKeyEdit,bool) if{ 0 (>L:EFSRS_KeyDigits,number) 0 (>L:EFSRS_KeyCount,number) } els{",
+        "            (L:EFSRS_SelectedRadio,number) 3 == if{ 0 (>L:EFSRS_IntercomDigits,number) 0 (>L:EFSRS_IntercomCount,number) } els{ 0 (>L:EFSRS_FreqDigits,number) 0 (>L:EFSRS_FreqCount,number) }",
+        "        }",
+        "        0 (>L:EFSRS_InputError,bool) 0 (>L:DEP_KEY,number)",
+        "    }",
+        "    (L:EFSRS_EncKeyEdit,bool) if{",
+        "        (L:EFSRS_KeyDigits,number) (>L:EFSRS_InputDigits,number)",
+        "        (L:EFSRS_KeyCount,number) (>L:EFSRS_DigitCount,number)",
+        "    } els{ (L:EFSRS_SelectedRadio,number) 3 == if{",
+        "        (L:EFSRS_IntercomDigits,number) (>L:EFSRS_InputDigits,number)",
+        "        (L:EFSRS_IntercomCount,number) (>L:EFSRS_DigitCount,number)",
+        "    } els{",
+        "        (L:EFSRS_FreqDigits,number) (>L:EFSRS_InputDigits,number)",
+        "        (L:EFSRS_FreqCount,number) (>L:EFSRS_DigitCount,number)",
+        "    } }",
+        "    (L:EFSRS_DigitCount,number) (>L:DEP_digit_counter,number)",
+        "}",
+        "</Value></Select></Element>",
+        "",
+        ""
+      ]
+    }
+  ],
+  "dep_output": {
+    "utf8_bom": true,
+    "line_ending": "LF",
+    "final_newline": false
+  },
+  "control_output": {
+    "utf8_bom": true,
+    "line_ending": "LF",
+    "final_newline": true
+  }
+}
