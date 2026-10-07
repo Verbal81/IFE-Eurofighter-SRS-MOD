@@ -8,6 +8,21 @@
 
 Integration of DCS SimpleRadio Standalone (SRS) with the IndiaFoxtEcho Eurofighter in Microsoft Flight Simulator 2024.
 
+<img width="374" height="768" alt="IFE Eurofighter SRS MOD" src="https://github.com/user-attachments/assets/865d3fab-7adc-4aff-8c8a-db75a44ad72d" />
+
+## Antivirus verification / Security note
+
+The v1.1m3 release package was submitted to the Avira Virus Lab for analysis.
+
+Avira classified the submitted files as **Clean**.
+
+The application is not commercially code-signed, so Windows or other antivirus products may still show reputation-based warnings.
+
+This independent malware analysis is provided as an additional transparency measure.
+
+Users should never disable their antivirus software to install the MOD.
+
+
 ## Compatibility
 - Microsoft Flight Simulator 2024
 - IndiaFoxtEcho Eurofighter 1.0.10 (verified by exact file hashes)
