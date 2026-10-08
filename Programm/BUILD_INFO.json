@@ -1,7 +1,7 @@
 {
   "product": "IFE Eurofighter SRS MOD",
   "version": "v1.1m4",
-  "release_status": "FINAL_USER_VERIFIED",
+  "release_status": "COMPATIBILITY_1_0_9_TEST",
   "validation": {
     "clean_install_from_verified_ife_originals": true,
     "semantic_patch_outputs_verified": "3/3",
@@ -35,5 +35,18 @@
     ],
     "windows_retest": "user confirmed working on Windows 2026-10-08",
     "validation_source": "Author's explicit report in conversation; not an independent cross-system test."
+  },
+  "compatibility_profiles": {
+    "supported_file_profiles": [
+      "1.0.9",
+      "1.0.10"
+    ],
+    "selection": "all three XML hashes; no package version gate",
+    "new_1_0_9_validation": {
+      "xml_patch_outputs": "3/3 offline verified",
+      "manufacturer_content_outside_model_callbacks": "byte-preserved",
+      "windows_install_start_restore": "pending user test"
+    },
+    "prior_1_0_10_validation": "retained; existing patch recipe and radio outputs unchanged"
   }
 }

@@ -1000,5 +1000,35 @@
     "utf8_bom": true,
     "line_ending": "LF",
     "final_newline": true
-  }
+  },
+  "source_profiles": [
+    {
+      "id": "ife-1.0.10-verified",
+      "supported_source": {
+        "ife_version": "1.0.10",
+        "EFA_interior.xml": "4cc1a2fae0f75160068de5c026b5ba6b614710a991a3575e5f3ccdbf62a9f480",
+        "EF2000DEP.xml": "397bc8a4141db0a85289df5ffe3b46855f52631665d1ded03c47fa9bd914f266",
+        "EF2000_DEP_Control.xml": "1b539670eb6c18cbb592a2226c148a964f744556789b8683bf156f2897ce89ec"
+      },
+      "expected_output": {
+        "EFA_interior.xml": "4c196b24a05d959cd66b6911f549c998296094dd1ba079e46dab4fc8872a9c60",
+        "EF2000DEP.xml": "c99086e1d17fb5ab4fc6c833231e84a4da7e106cb28503fc2dffbee2313959f8",
+        "EF2000_DEP_Control.xml": "2f92a033fde38a212ce00d5967689400307c86d687dc14976a90c3d9d5bfaac2"
+      }
+    },
+    {
+      "id": "ife-1.0.9-verified",
+      "supported_source": {
+        "ife_version": "1.0.9",
+        "EFA_interior.xml": "6c802aaa549c3805796afc5a8fbdcbd125a96e66ca1b0e0f7753e4a7c70d1f51",
+        "EF2000DEP.xml": "397bc8a4141db0a85289df5ffe3b46855f52631665d1ded03c47fa9bd914f266",
+        "EF2000_DEP_Control.xml": "1b539670eb6c18cbb592a2226c148a964f744556789b8683bf156f2897ce89ec"
+      },
+      "expected_output": {
+        "EFA_interior.xml": "fc9f9308edb7bd20f114813be0f60eaca69f6a643edd34ccb04829af72ffa8f2",
+        "EF2000DEP.xml": "c99086e1d17fb5ab4fc6c833231e84a4da7e106cb28503fc2dffbee2313959f8",
+        "EF2000_DEP_Control.xml": "2f92a033fde38a212ce00d5967689400307c86d687dc14976a90c3d9d5bfaac2"
+      }
+    }
+  ]
 }

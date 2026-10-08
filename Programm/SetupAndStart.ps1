@@ -133,7 +133,7 @@ try{
     New-Item -ItemType Directory -Path (Join-Path $work 'payload') -Force|Out-Null
     Copy-Item -LiteralPath (Join-Path $base 'aircraft\Installer.ps1') -Destination (Join-Path $work 'Installer.ps1')
     Copy-Item -LiteralPath (Join-Path $base 'aircraft\manifest.json') -Destination (Join-Path $work 'manifest.json')
-    & $ps -NoLogo -NoProfile -ExecutionPolicy Bypass -File (Join-Path $base 'GeneratePayload.ps1') -PackagePath $package -OutputDir (Join-Path $work 'payload')
+    & $ps -NoLogo -NoProfile -ExecutionPolicy Bypass -File (Join-Path $base 'GeneratePayload.ps1') -PackagePath $package -OutputDir (Join-Path $work 'payload') -InstallerManifestPath (Join-Path $work 'manifest.json')
     if($LASTEXITCODE -ne 0){throw 'Semantische Patch-Erzeugung fehlgeschlagen.'}
     $args=@('-NoLogo','-NoProfile','-STA','-ExecutionPolicy','Bypass','-File',(Join-Path $work 'Installer.ps1'),'-PackagePath',$package,'-SrsClientPath',$srs)
     if($CheckOnly){$args+='-CheckOnly'}else{$args+='-InstallOnly'}

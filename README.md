@@ -43,9 +43,15 @@ Users should never disable their antivirus software to install the MOD.
 
 ## Compatibility
 - Microsoft Flight Simulator 2024
-- IndiaFoxtEcho Eurofighter 1.0.10 (verified by exact file hashes)
+- IndiaFoxtEcho Eurofighter 1.0.9 und 1.0.10 (geprüfte XML-Dateistände; Erkennung über Prüfsummen)
 - DCS SimpleRadio Standalone 2.4.1.0
 - Windows PowerShell 5.1, 64-bit
+
+## Kompatibilität mit 1.0.9 / 1.0.10
+
+Der Installer erkennt den passenden Patch anhand aller drei XML-Dateien, unabhängig von der Versionsnummer im Paketmanifest. Der Inhalt außerhalb der 21 betroffenen Modelldatei-Tastenfunktionen bleibt erhalten. Die Wiederherstellung verwendet die zum Profil passende Original-Sicherung. Unbekannte Dateistände werden weiterhin geschützt abgelehnt.
+
+**Neuer 1.0.9-Teststand:** Die drei XML-Ausgabedateien sind offline geprüft. Installation, Funkbetrieb und Wiederherstellung unter Windows müssen für 1.0.9 noch praktisch getestet werden. Die bestehende 1.0.10-Funklogik bleibt unverändert.
 
 ## Welche Datei starten?
 

@@ -1,4 +1,4 @@
-﻿param([Parameter(Mandatory=$true)][string]$PackagePath,[Parameter(Mandatory=$true)][string]$OutputDir)
+﻿param([Parameter(Mandatory=$true)][string]$PackagePath,[Parameter(Mandatory=$true)][string]$OutputDir,[string]$InstallerManifestPath)
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
 $Base=Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -52,17 +52,32 @@ $rel=[ordered]@{
 }
 
 
-# Refuse unknown live states. Original and our exact patched state are accepted.
-foreach($name in $rel.Keys) {
+# Select one verified three-file profile by content, independent of package version.
+$liveHashes=@{}
+foreach($name in $rel.Keys){
     $p=Join-Path $Aircraft $rel[$name]
-    if (-not (Test-Path -LiteralPath $p -PathType Leaf)) { throw "Eurofighter-Datei fehlt: $p" }
-    $h=Sha256 $p
-    $src=[string]$Manifest.supported_source.$name
-    $patched=[string]$Manifest.expected_output.$name
-    if ($h -ne $src -and $h -ne $patched) { throw "Unbekannter Dateistand: $name`r`nSHA-256: $h" }
+    if(-not (Test-Path -LiteralPath $p -PathType Leaf)){throw "Eurofighter-Datei fehlt: $p"}
+    $liveHashes[$name]=Sha256 $p
 }
+$matchingProfiles=@()
+foreach($candidate in @($Manifest.source_profiles)){
+    $ok=$true
+    foreach($name in $rel.Keys){
+        if($liveHashes[$name] -notin @([string]$candidate.supported_source.$name,[string]$candidate.expected_output.$name)){$ok=$false;break}
+    }
+    if($ok){$matchingProfiles+=$candidate}
+}
+if($matchingProfiles.Count -ne 1){
+    $details=($rel.Keys | ForEach-Object {$_+': '+$liveHashes[$_]}) -join "`r`n"
+    throw ("Kein eindeutig unterstuetzter Eurofighter-Dateistand. Geprueft sind kompatible 1.0.9- und 1.0.10-Dateien. Nichts am Flugzeug wurde veraendert.`r`n"+$details)
+}
+$profile=$matchingProfiles[0]
+$Manifest.supported_source=$profile.supported_source
+$Manifest.expected_output=$profile.expected_output
+Write-Host ('Kompatibilitaetsprofil: '+[string]$profile.id)
+
 # Resolve an exact original source for each target.
-# TRUE CLEAN INSTALL: untouched live IFE 1.0.10 files are used directly.
+# TRUE CLEAN INSTALL: untouched live files from the selected verified profile are used directly.
 # MIGRATION: an already patched file requires a verified local original backup.
 # No IndiaFoxtEcho aircraft XML is shipped with this mod.
 $sourceOriginal=@{}
@@ -95,7 +110,7 @@ foreach($name in $rel.Keys) {
         if((Test-Path -LiteralPath $bp -PathType Leaf) -and (Sha256 $bp) -eq $srcHash){$found=$bp;break}
     }
     if(-not $found){
-        throw "Der bereits gepatchte Dateistand von $name wurde erkannt, aber keine verifizierte lokale IFE-Originalsicherung ist vorhanden.`r`nFuer eine Migration bitte zuerst die IFE-Dateien ueber die offizielle Installation wiederherstellen. Eine saubere Erstinstallation auf originalen IFE-1.0.10-Dateien benoetigt keine alte EF-SRS-Sicherung."
+        throw "Der bereits gepatchte Dateistand von $name wurde erkannt, aber keine verifizierte lokale IFE-Originalsicherung ist vorhanden.`r`nFuer eine Migration bitte zuerst die IFE-Dateien ueber die offizielle Installation wiederherstellen. Eine saubere Erstinstallation auf unterstuetzten IFE-Originaldateien benoetigt keine alte EF-SRS-Sicherung."
     }
     $sourceOriginal[$name]=$found
     Write-Host ("Patch-Quelle "+$name+": verifizierte lokale Originalsicherung.")
@@ -181,3 +196,19 @@ foreach($name in $rel.Keys) {
     if ($h -ne $expected) { throw "Semantischer Patch erzeugte falschen Hash: $name`r`n$h`r`nErwartet: $expected" }
 }
 Write-Host 'Semantischer Patch: 3/3 Ausgabedateien exakt verifiziert.' -ForegroundColor Green
+
+# Use the same selected profile for the installer, never a fixed output hash.
+if($InstallerManifestPath){
+    $installerManifest=Get-Content -LiteralPath (Join-Path $Base 'aircraft\manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach($target in $installerManifest.targets){
+        $name=[IO.Path]::GetFileName(([string]$target.path).Replace('/','\'))
+        if(-not $rel.Contains($name)){throw 'Unbekanntes Ziel im Installer-Manifest.'}
+        $target.sha256=[string]$profile.expected_output.$name
+        $target.accepted_sha256=@([string]$profile.supported_source.$name,[string]$profile.expected_output.$name)
+    }
+    $installerManifest.version='1.1m4 - '+[string]$profile.id
+    $installerManifest.package_version=[string]$profile.supported_source.ife_version
+    $utf8NoBom=New-Object Text.UTF8Encoding($false)
+    [IO.File]::WriteAllText([IO.Path]::GetFullPath($InstallerManifestPath),($installerManifest | ConvertTo-Json -Depth 20),$utf8NoBom)
+}
+

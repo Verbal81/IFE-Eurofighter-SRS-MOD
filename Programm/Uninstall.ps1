@@ -36,7 +36,7 @@ try{
     # Stop our/legacy known bridge if present.
     & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'runtime\Launcher.ps1') -StopOnly
     if($LASTEXITCODE -ne 0){throw 'Bridge konnte nicht sicher beendet werden.'}
-    $chosen=$null;$journal=$null
+    $chosen=$null;$journal=$null;$profile=$null
     $all=New-Object System.Collections.Generic.List[object]
     foreach($root in @(Get-ChildItem -LiteralPath $data -Directory -Filter 'backups-*' -ErrorAction SilentlyContinue)){
         foreach($d in @(Get-ChildItem -LiteralPath $root.FullName -Directory -ErrorAction SilentlyContinue)){
@@ -49,14 +49,21 @@ try{
         try{$j=Json $jp}catch{continue}
         if(-not $j.PSObject.Properties['package_root']){continue}
         if(-not ([string]$j.package_root).TrimEnd([char[]]'\/').Equals($package,[StringComparison]::OrdinalIgnoreCase)){continue}
-        $ok=$true
-        foreach($name in $rel.Keys){$bp=Join-Path $d ('original\'+$rel[$name]);if(-not(Test-Path -LiteralPath $bp -PathType Leaf) -or (Hash $bp) -ne [string]$manifest.supported_source.$name){$ok=$false;break}}
-        $layoutBackup=Join-Path $d 'original\layout.json'
-        if($ok -and (Test-Path -LiteralPath $layoutBackup -PathType Leaf)){$chosen=$d;$journal=$j;break}
+        foreach($candidate in @($manifest.source_profiles)){
+            $ok=$true
+            foreach($name in $rel.Keys){
+                $bp=Join-Path $d ('original\'+$rel[$name])
+                if(-not(Test-Path -LiteralPath $bp -PathType Leaf) -or (Hash $bp) -ne [string]$candidate.supported_source.$name){$ok=$false;break}
+            }
+            $layoutBackup=Join-Path $d 'original\layout.json'
+            if($ok -and (Test-Path -LiteralPath $layoutBackup -PathType Leaf)){$chosen=$d;$journal=$j;$profile=$candidate;break}
+        }
+        if($chosen){break}
     }
-    if(-not $chosen){throw 'Keine verifizierte IFE-1.0.10-Originalsicherung gefunden. Nichts wurde veraendert.'}
+    if(-not $chosen){throw 'Keine verifizierte Originalsicherung eines unterstuetzten IFE-Dateistands gefunden. Nichts wurde veraendert.'}
+
     foreach($name in $rel.Keys){
-        $live=Join-Path $package $rel[$name];$h=Hash $live;$src=[string]$manifest.supported_source.$name;$patched=[string]$manifest.expected_output.$name
+        $live=Join-Path $package $rel[$name];$h=Hash $live;$src=[string]$profile.supported_source.$name;$patched=[string]$profile.expected_output.$name
         if($h -ne $src -and $h -ne $patched){throw "Fremde/unbekannte Aenderung erkannt: $name`r`nSHA-256: $h`r`nUninstall sicher abgebrochen."}
     }
     $answer=[Windows.Forms.MessageBox]::Show("IFE-Originaldateien wiederherstellen und EF-SRS v1.1m4 entfernen?`r`n`r`nEine zusaetzliche Sicherheitskopie des aktuellen Standes wird vorher angelegt.",$title,[Windows.Forms.MessageBoxButtons]::YesNo,[Windows.Forms.MessageBoxIcon]::Question)
@@ -83,7 +90,7 @@ try{
         [IO.File]::SetLastWriteTimeUtc($dst,[DateTime]::FromFileTimeUtc([long]([string]$rec.original_filetime)))
         if((Hash $dst) -ne [string]$rec.original_sha256){throw "Wiederherstellung nicht verifiziert: $n"}
     }
-    foreach($name in $rel.Keys){if((Hash (Join-Path $package $rel[$name])) -ne [string]$manifest.supported_source.$name){throw "IFE-Originalhash nach Uninstall falsch: $name"}}
+    foreach($name in $rel.Keys){if((Hash (Join-Path $package $rel[$name])) -ne [string]$profile.supported_source.$name){throw "IFE-Originalhash nach Uninstall falsch: $name"}}
     foreach($p in @((Join-Path $data 'runtime-v11m4-finalrc2'),(Join-Path $data 'v11m4-finalrc2'))){if(Test-Path -LiteralPath $p){Remove-Item -LiteralPath $p -Recurse -Force -ErrorAction Stop}}
     & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'DesktopShortcut.ps1') -Remove
     if($LASTEXITCODE -ne 0){Write-Warning 'Desktop-Verknuepfung konnte nicht entfernt werden; bitte bei Bedarf manuell entfernen.'}

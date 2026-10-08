@@ -48,10 +48,14 @@ README.md = ausfuehrliche Hinweise.
 LICENSE = Nutzungsbedingungen.
 THIRD_PARTY_NOTICE.txt = Hinweise zu Fremdprodukten.
 
-Kompatibilitaet: MSFS 2024, IFE Eurofighter 1.0.10, SRS 2.4.1.0.
+Kompatibilitaet: MSFS 2024, IFE Eurofighter 1.0.9 / 1.0.10, SRS 2.4.1.0.
 Inoffizieller Mod, nicht von IndiaFoxtEcho unterstuetzt.
 Repository: https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD
 
 Teststatus (08.10.2026): Diese nutzerfreundliche Ausgabe wurde vom Autor
 unter Windows erfolgreich getestet und als funktionierend bestaetigt.
 Dies ist keine Garantie fuer jede Systemkonfiguration.
+
+NEU: Dateiprofil fuer IFE 1.0.9 ergaenzt. Drei XML-Ausgaben offline
+verifiziert; Windows-Installation, Funkbetrieb und Wiederherstellung fuer
+1.0.9 stehen noch zum praktischen Test an.
