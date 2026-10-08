@@ -6,7 +6,7 @@
     "BUILD_INFO.json": "a9457bc539909b8ce431302da9f793e3ea5163b464fa13be91f2eabb95d9f569",
     "GeneratePayload.ps1": "966d4dca618a85da461f2cceee885201374995f35af33ad108f52e65cc0a556e",
     "Menu.ps1": "2b11ba27c2beebcb72a5163aaa48bf3a73f30cce1addfd480144ebd6fb8c68d0",
-    "README.md": "1d759be7f81bc3c7fe6ec816daa6589addefef4efbb6ca472245d469ecbe7446",
+    "README.md": "d1fccd07aaff700bbe9a87c023420c9ab36c0ad835d033aa4bf9e7730b6d4657",
     "RELEASE_NOTES.txt": "c0ccffb1e5b1998cc012bfc1827b965167741938ca46ae33bdd03f3e38c7170b",
     "START_v1.1m4.cmd": "f05a5f433662fab18164c4e0bb8c5901e64094b7e64097c9d006ff621efeed70",
     "SetupAndStart.ps1": "b8f48124987d00664edac2bd136a84a9dbd2c18ef75b58a33b65c04cda477ca4",
@@ -21,6 +21,7 @@
     "runtime/src/Bridge.cs": "e0aa8cd6a1e5ec9d4f905b28de417a0bba77e00b9978a40de748cf24f9fb0602",
     "runtime/src/Link.cs": "249721f99ed4619bd4bfe41df81958f856a991460762f5757f5c22ca22a3bd60",
     "runtime/src/NativeSimConnect.cs": "4e94ad87614ec160b5eaabdeec7e56e4a3d3cd7cf0f6e43a7ef9d6df951b2661",
-    "runtime/src/SrsHook.cs": "77a530e7e045531e51765cacc8195428560dd5877a09496a290b24a545c3299a"
+    "runtime/src/SrsHook.cs": "77a530e7e045531e51765cacc8195428560dd5877a09496a290b24a545c3299a",
+    "LICENSE": "93de1f5eadfa38f6249fc5f962b0b64695829171c0fe69a825f38558571b7469"
   }
 }
