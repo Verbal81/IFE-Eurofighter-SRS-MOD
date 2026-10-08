@@ -147,7 +147,7 @@ try{
     }
     & $ps -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'DesktopShortcut.ps1')
     if($LASTEXITCODE -ne 0){
-        [void][Windows.Forms.MessageBox]::Show('Einrichtung erfolgreich, Desktop-Verknuepfung konnte nicht erstellt werden. Du kannst SRS_STARTEN.cmd verwenden oder im Menue Desktop-Verknuepfung erstellen waehlen.',$title)
+        [void][Windows.Forms.MessageBox]::Show('Einrichtung erfolgreich, Desktop-Verknuepfung konnte nicht erstellt werden. Du kannst 2_SRS_MOD_STARTEN.cmd im Mod-Hauptordner verwenden oder unter 3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd die Desktop-Verknuepfung erstellen.',$title)
     }
     & $ps -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'runtime\Launcher.ps1')
     if($LASTEXITCODE -ne 0){throw 'Patch ist eingerichtet, aber Bridge/SRS-Start wurde abgebrochen.'}

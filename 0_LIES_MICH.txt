@@ -1,0 +1,50 @@
+IFE EUROFIGHTER SRS MOD | By Verbal81
+==================================
+
+ZIP zuerst vollstaendig entpacken. Nicht im Archiv starten.
+Den gesamten entpackten Ordner dauerhaft behalten.
+
+WAS MUSS ICH STARTEN?
+--------------------
+
+NEU INSTALLIEREN:
+1_EINMALIG_EINRICHTEN.cmd
+MSFS und SRS vorher schliessen. Bei Bedarf Flugzeug- und SRS-CLIENT-Ordner
+auswaehlen. Die Einrichtung legt "SRS-Mod starten" auf dem Desktop an
+und startet SRS und Bridge. Auf die Bereitschaftsmeldung warten.
+
+BEREITS INSTALLIERT / DIESES UPDATE:
+3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd
+"Desktop-Verknuepfung erstellen" waehlen. Die bestehende eigene
+Verknuepfung wird auf den neuen Mod-Ordner aktualisiert.
+Eine erneute Flugzeuginstallation ist nicht erforderlich.
+
+JEDES MAL ZUM FLIEGEN:
+"SRS-Mod starten" auf dem Desktop doppelklicken.
+Oder: 2_SRS_MOD_STARTEN.cmd
+MSFS und SRS vorher schliessen. Auf die Bereitschaftsmeldung warten,
+SRS verbinden und danach MSFS starten.
+
+PFAD AENDERN, PRUEFEN ODER DEINSTALLIEREN:
+3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd
+
+WICHTIG
+-------
+SRS nicht separat zuerst starten: Der Mod startet SRS und Bridge gemeinsam
+mit der ENC/HOLD-Erweiterung.
+Die Bridge startet NICHT automatisch beim normalen Oeffnen von SRS.
+Nach einem PC-Neustart oder Beenden von SRS/Bridge den Direktstart erneut nutzen.
+Der taegliche Direktstart veraendert keine Flugzeugdateien.
+Kein Windows-Autostart.
+Im Ordner "Programm" muss nichts einzeln angeklickt werden.
+README.md = ausfuehrliche Hinweise.
+LICENSE = Nutzungsbedingungen.
+THIRD_PARTY_NOTICE.txt = Hinweise zu Fremdprodukten.
+
+Kompatibilitaet: MSFS 2024, IFE Eurofighter 1.0.10, SRS 2.4.1.0.
+Inoffizieller Mod, nicht von IndiaFoxtEcho unterstuetzt.
+Repository: https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD
+
+Teststatus: Der vorherige Direktstart wurde vom Autor unter Windows bestaetigt.
+Die neue Ordnerstruktur, CMD-Einstiege und Verknuepfungsaktualisierung
+sind noch praktisch unter Windows zu pruefen.

@@ -31,7 +31,7 @@ $rel=[ordered]@{
 try{
     $running=@(Get-Process -ErrorAction SilentlyContinue|Where-Object{$_.ProcessName -match '^(FlightSimulator|FlightSimulator2024|SR-ClientRadio)$'})
     if($running.Count -gt 0){throw 'Bitte MSFS 2024 und SRS komplett schliessen.'}
-    if(-not (Test-Path -LiteralPath $settingsPath -PathType Leaf)){throw 'v1.1m4 Einstellungen fehlen. Bitte zuerst Einrichtung / Start ausfuehren.'}
+    if(-not (Test-Path -LiteralPath $settingsPath -PathType Leaf)){throw 'v1.1m4 Einstellungen fehlen. Bitte zuerst 1_EINMALIG_EINRICHTEN.cmd im Mod-Hauptordner ausfuehren.'}
     $package=[IO.Path]::GetFullPath([string](Json $settingsPath).package_root).TrimEnd([char[]]'\/')
     # Stop our/legacy known bridge if present.
     & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'runtime\Launcher.ps1') -StopOnly

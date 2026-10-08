@@ -1,5 +1,15 @@
 # IFE Eurofighter SRS MOD — v1.1m4
 
+**By Verbal81 · MSFS 2024 · IFE Eurofighter · SRS**
+
+## [⬇ ZIP HERUNTERLADEN](https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD/archive/refs/heads/main.zip)
+
+**Neu installieren:** `1_EINMALIG_EINRICHTEN.cmd`  
+**Zum Fliegen:** Desktop-Verknuepfung **SRS-Mod starten**  
+**Bereits installiert / Update:** `3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd` → **Desktop-Verknuepfung erstellen**
+
+Das ZIP zuerst vollstaendig entpacken. Kurzanleitung: [0_LIES_MICH.txt](0_LIES_MICH.txt).
+
 ## Wichtiger Hinweis / Important Notice
 
 **DE:** Dies ist eine inoffizielle Drittanbieter-Modifikation und steht in keiner Verbindung zu IndiaFoxtEcho bzw. wird nicht von IndiaFoxtEcho unterstützt. Dieser Mod enthält oder verbreitet keine vollständigen originalen IndiaFoxtEcho-Flugzeugdateien. Sämtliche erforderlichen Änderungen werden ausschließlich lokal an der beim Benutzer installierten Eurofighter-Version vorgenommen. IndiaFoxtEcho ist für diese Modifikation nicht verantwortlich und übernimmt keinen Support dafür. Support für diesen Mod erfolgt ausschließlich durch den Mod-Autor.
@@ -29,61 +39,67 @@ Users should never disable their antivirus software to install the MOD.
 - DCS SimpleRadio Standalone 2.4.1.0
 - Windows PowerShell 5.1, 64-bit
 
-## Einmalige Einrichtung / First-time setup
+## Welche Datei starten?
 
-1. ZIP vollstaendig in einen dauerhaften Ordner entpacken. Diesen Ordner danach
-   behalten; die Desktop-Verknuepfung verweist darauf.
-2. MSFS 2024 und SRS schliessen.
-3. `START_v1.1m4.cmd` starten und **Einmalige Einrichtung / Reparatur** waehlen.
-4. Bei der SRS-Auswahl den **CLIENT-Ordner** waehlen, der
-   `SR-ClientRadio.exe` direkt enthaelt.
-5. Nach erfolgreicher Einrichtung wird **SRS-Mod starten** auf dem Desktop
-   angelegt. SRS und Bridge werden gestartet. Auf die Bereitschaftsmeldung
-   warten, SRS verbinden und danach MSFS 2024 starten.
+ZIP **vollstaendig entpacken** und den gesamten Ordner dauerhaft behalten.
+Die internen Dateien unter `Programm` nicht einzeln starten.
 
-**Bereits eingerichtet?** Das aktuelle Paket vollstaendig entpacken, das Menue
-oeffnen und **Desktop-Verknuepfung erstellen** waehlen. Eine erneute
-Flugzeuginstallation ist dafuer nicht erforderlich. Eine vorhandene Verknuepfung
-aus einem anderen Mod-Ordner wird nicht automatisch ueberschrieben; bei einem
-Umzug die alte Verknuepfung selbst entfernen und neu erstellen.
+| Dein Ziel | Hier doppelklicken |
+|---|---|
+| Zum ersten Mal installieren | **`1_EINMALIG_EINRICHTEN.cmd`** |
+| Taeglich fliegen | **SRS-Mod starten** auf dem Desktop oder **`2_SRS_MOD_STARTEN.cmd`** |
+| Einstellungen, Pfade, Pruefung oder Deinstallation | **`3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd`** |
+| Kurze Anleitung lesen | **`0_LIES_MICH.txt`** |
 
-**Teststand:** Die neue Desktop-Verknuepfung und der Direktstart muessen noch unter Windows praktisch geprueft werden. Die bestehende Flugzeug- und Funklogik bleibt unveraendert.
+### Erstinstallation
 
-**PowerShell:** Die Startskripte wechseln bei Aufruf aus PowerShell 7 automatisch zu 64-Bit Windows PowerShell 5.1. Zum normalen Start bitte die CMD-Dateien oder Desktop-Verknuepfung verwenden; die PS1-Dateien sind interne Bestandteile.
+MSFS und SRS schliessen, dann **`1_EINMALIG_EINRICHTEN.cmd`** starten.
+Bei Bedarf Eurofighter-Ordner und SRS-CLIENT-Ordner auswaehlen.
+Im CLIENT-Ordner muss `SR-ClientRadio.exe` direkt liegen.
+Nach erfolgreicher Einrichtung wird die Desktop-Verknuepfung angelegt;
+SRS und Bridge werden ebenfalls gestartet. Bereitschaftsmeldung abwarten,
+SRS verbinden, dann MSFS starten.
 
-## Taeglicher Start / Daily start
+### Bereits installiert? Dieses Update einrichten
 
-Nach einem PC-Neustart oder nach dem Beenden von SRS/Bridge:
-1. MSFS 2024 und SRS muessen geschlossen sein.
-2. Auf **SRS-Mod starten** auf dem Desktop doppelklicken.
-3. Auf die Bereitschaftsmeldung warten, SRS verbinden, dann MSFS starten.
+**`3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd`** starten und
+**Desktop-Verknuepfung erstellen** waehlen. Die eigene bestehende Verknuepfung
+wird auf den neuen Mod-Ordner aktualisiert. Eine erneute Installation des
+Flugzeugpatches ist nicht erforderlich. Danach den neuen Ordner behalten.
 
-Der Direktstart oeffnet kein Einrichtungsmenue und veraendert keine
-Flugzeugdateien. Er prueft den installierten Patch und startet SRS mit der
-ENC/HOLD-Erweiterung sowie die Bridge. Das Bereitschaftsfenster bleibt erhalten.
-Ohne laufende Bridge werden Frequenzen nicht synchronisiert.
+### Taeglicher Start
 
-Als Alternative funktioniert `SRS_STARTEN.cmd` im entpackten Mod-Ordner.
-Pfadwechsel, Reparatur und Deinstallation bleiben ueber `START_v1.1m4.cmd`
-erreichbar. Es wird kein Windows-Autostart eingerichtet.
+1. MSFS und SRS schliessen.
+2. **SRS-Mod starten** auf dem Desktop doppelklicken
+   (alternativ **`2_SRS_MOD_STARTEN.cmd`**).
+3. Bereitschaftsmeldung abwarten.
+4. SRS verbinden, danach MSFS starten.
 
-**EN:** Extract the entire package to a permanent folder and keep that folder.
-Run `START_v1.1m4.cmd` once and select **Einmalige Einrichtung / Reparatur**.
-Successful setup creates the **SRS-Mod starten** desktop shortcut. Existing
-users can select **Desktop-Verknuepfung erstellen** without reinstalling the
-aircraft patch. After restarting the PC or closing SRS/Bridge, close MSFS and
-SRS, double-click the shortcut, wait for the ready message, connect SRS, then
-start MSFS. Daily start does not run the installer or modify aircraft files.
-Use `SRS_STARTEN.cmd` as a fallback. Keep the extracted folder in place; if
-moving it, remove the old shortcut yourself and recreate it. No Windows
-autostart is installed.
+**SRS und Bridge werden gemeinsam gestartet.** Das normale Oeffnen von SRS
+startet die Bridge nicht. Nach einem PC-Neustart oder nach dem Beenden von
+SRS/Bridge den Direktstart wieder nutzen. Die Flugzeugaenderungen bleiben
+installiert; der Direktstart veraendert keine Flugzeugdateien.
+Es wird kein Windows-Autostart eingerichtet.
+
+**EN:** Fully extract and keep the entire folder. First-time installation:
+`1_EINMALIG_EINRICHTEN.cmd`. Daily start: the **SRS-Mod starten** desktop
+shortcut or `2_SRS_MOD_STARTEN.cmd`. Settings and uninstall:
+`3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd`. Existing users should open settings
+and select **Desktop-Verknuepfung erstellen** to update the shortcut without
+reinstalling the aircraft patch. Close MSFS and SRS before starting; wait for
+the ready message, connect SRS, then start MSFS. Starting ordinary SRS alone
+does not start the bridge. Internal files are in `Programm`.
+
+**Teststatus:** Der vorherige Direktstart samt PowerShell-Korrektur wurde vom
+Autor unter Windows bestaetigt. Die neue Ordnerstruktur, CMD-Einstiege und
+Verknuepfungsaktualisierung stehen noch zur praktischen Windows-Pruefung an.
 
 The installer verifies the supported aircraft state before writing anything. It creates a local verified backup and uses transactional replacement with rollback.
 
 The mod does not ship Microsoft SimConnect DLLs. It uses `SimConnect_internal.dll` from the user's own installed Microsoft Flight Simulator 2024 copy.
 
 ## Deinstallation / Uninstall
-Close MSFS 2024 and SRS, run `START_v1.1m4.cmd`, then choose **Deinstallieren / IFE wiederherstellen**.
+MSFS und SRS schliessen, `3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd` starten und **Mod deinstallieren / Flugzeug wiederherstellen** waehlen.
 
 The uninstaller restores the three supported IFE XML files and `layout.json` from a verified local original backup and verifies the restored hashes. Unknown third-party file states cause a safe abort instead of being overwritten.
 

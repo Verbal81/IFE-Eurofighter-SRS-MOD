@@ -18,7 +18,7 @@ $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
 $desktop=[Environment]::GetFolderPath([Environment+SpecialFolder]::DesktopDirectory)
 if(-not $desktop -or -not (Test-Path -LiteralPath $desktop -PathType Container)){
-    throw 'Desktop-Ordner nicht gefunden. SRS_STARTEN.cmd kann direkt gestartet werden.'
+    throw 'Desktop-Ordner nicht gefunden. 2_SRS_MOD_STARTEN.cmd kann direkt gestartet werden.'
 }
 $shortcutPath=Join-Path $desktop 'SRS-Mod starten.lnk'
 $scriptPath=Join-Path $PSScriptRoot 'StartRadio.ps1'
@@ -34,10 +34,12 @@ try{
         # Do not overwrite/remove an unrelated shortcut or one owned by another folder.
         $owned=([string]$link.Description -eq $description) -and
                ([string]$link.TargetPath -ieq $powershell) -and
-               ([string]$link.Arguments -eq $arguments)
+               ([string]$link.Arguments -match '^-NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File "[^"]+\\StartRadio\.ps1"$')
+        # An update may retarget our own shortcut. Uninstall only removes this folder's link.
+        if($Remove -and ([string]$link.Arguments -ne $arguments)){exit 0}
         if(-not $owned){
             if($Remove){exit 0}
-            throw 'SRS-Mod starten.lnk existiert bereits fuer einen anderen Ordner oder ein anderes Programm. Bitte diese Verknuepfung selbst umbenennen oder entfernen und erneut versuchen.'
+            throw 'SRS-Mod starten.lnk gehoert zu einem anderen Programm. Bitte diese Verknuepfung selbst umbenennen oder entfernen und erneut versuchen.'
         }
     }
     if($Remove){Remove-Item -LiteralPath $shortcutPath -Force;exit 0}

@@ -20,7 +20,7 @@ $title='IFE_Eurofighter_SRS_MOD - SRS-Mod starten'
 $settingsPath=Join-Path $env:LOCALAPPDATA 'EF-SRS\launcher-v11m4-finalrc2.json'
 try{
     if(-not (Test-Path -LiteralPath $settingsPath -PathType Leaf)){
-        throw 'Bitte zuerst START_v1.1m4.cmd oeffnen und Einmalige Einrichtung / Reparatur ausfuehren.'
+        throw 'Bitte zuerst 1_EINMALIG_EINRICHTEN.cmd im Mod-Hauptordner starten.'
     }
     # Daily start: validate the installed state and start SRS/Bridge only.
     # No patch generation, aircraft installation or backup replacement here.
