@@ -43,6 +43,7 @@ Nach einem PC-Neustart oder Beenden von SRS/Bridge den Direktstart erneut nutzen
 Der taegliche Direktstart veraendert keine Flugzeugdateien.
 Kein Windows-Autostart.
 Im Ordner "Programm" muss nichts einzeln angeklickt werden.
+IFE_Eurofighter_SRS_MOD_Anleitung.pdf = Installation und Bedienung (5 Seiten).
 README.md = ausfuehrliche Hinweise.
 LICENSE = Nutzungsbedingungen.
 THIRD_PARTY_NOTICE.txt = Hinweise zu Fremdprodukten.

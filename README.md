@@ -4,6 +4,10 @@
 
 ## [⬇ ZIP HERUNTERLADEN](https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD/archive/refs/heads/main.zip)
 
+## [📖 PDF-ANLEITUNG: INSTALLATION UND BEDIENUNG](IFE_Eurofighter_SRS_MOD_Anleitung.pdf)
+
+Die fünfseitige Anleitung enthält Erstinstallation, Update, Desktop-Verknüpfung, täglichen Start, Cockpitbedienung und Wiederherstellung. Sie liegt auch direkt im ZIP. Auf der PDF-Seite bei Bedarf **Download raw file** wählen.
+
 **Neu installieren:** `1_EINMALIG_EINRICHTEN.cmd`  
 **Zum Fliegen:** Desktop-Verknuepfung **SRS-Mod starten**  
 **Bereits installiert / Update:** `3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd` → **Desktop-Verknuepfung erstellen**
@@ -17,8 +21,6 @@ Das ZIP zuerst vollstaendig entpacken. Kurzanleitung: [0_LIES_MICH.txt](0_LIES_M
 **EN:** This is an unofficial third-party modification and is not affiliated with or endorsed by IndiaFoxtEcho. This mod does not contain or redistribute complete original IndiaFoxtEcho aircraft files. All required modifications are generated and applied locally to the user's installed Eurofighter files. IndiaFoxtEcho is not responsible for this modification and does not provide support for it. Support for this mod is provided solely by the mod author.
 
 Integration of DCS SimpleRadio Standalone (SRS) with the IndiaFoxtEcho Eurofighter in Microsoft Flight Simulator 2024.
-
-<img width="374" height="768" alt="IFE Eurofighter SRS MOD" src="https://github.com/user-attachments/assets/865d3fab-7adc-4aff-8c8a-db75a44ad72d" />
 
 ## Antivirus verification / Security note
 
