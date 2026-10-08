@@ -22,6 +22,12 @@ Das ZIP zuerst vollstaendig entpacken. Kurzanleitung: [0_LIES_MICH.txt](0_LIES_M
 
 Integration of DCS SimpleRadio Standalone (SRS) with the IndiaFoxtEcho Eurofighter in Microsoft Flight Simulator 2024.
 
+## Cockpit-Vorschau
+
+[![Eurofighter DEP mit SRS-Funkbedienung und HOLD-UHF-Anzeige](docs/images/eurofighter-srs-cockpit.jpg)](docs/images/eurofighter-srs-cockpit.jpg)
+
+UHF-Frequenz, ACT, ENC/KEY und Lautstärke direkt im Cockpit. Zum Vergrößern auf das Bild klicken.
+
 ## Antivirus verification / Security note
 
 The v1.1m3 release package was submitted to the Avira Virus Lab for analysis.
