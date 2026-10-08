@@ -1,21 +1,96 @@
-MIT License
+IFE Eurofighter SRS MOD — Personal Non-Commercial License
+Effective for distributions made under this license from 2026-10-08.
 
-Copyright (c) 2026 Carlo "Verbal"
+Copyright (c) 2026 Verbal (GitHub: Verbal81), to the extent copyright exists
+in the original project material controlled by this author.
+All rights reserved except as expressly granted below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. Scope
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This license applies only to the original application code, documentation
+and other project material for IFE Eurofighter SRS MOD for which Verbal
+has the right to grant a license (the "Software"). Third-party material is
+excluded and remains governed by its own terms. See THIRD_PARTY_NOTICE.txt.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+This is a custom, source-available license, not an open-source license.
+It does not claim exclusive rights over facts, public-domain material,
+third-party trademarks, or material not protected by applicable law.
+It grants no license to IndiaFoxtEcho aircraft files, Microsoft Flight
+Simulator or SimConnect, DCS SimpleRadio Standalone, or other third-party
+products. Users must obtain and use those products under their own terms.
+
+2. Free personal use
+
+You may download, copy, install and run the Software without charge for
+your own private, non-commercial flight-simulator use, including
+participation in non-commercial multiplayer simulator sessions.
+You may keep backup copies and modify the Software for that same private use.
+You may run your copy locally or on a private instance accessible only to you.
+
+This permission does not authorize real-world aircraft communications,
+flight planning, training for operational use, or flight operations.
+
+3. Publication, redistribution and commercial use
+
+Unless separately permitted by section 5 or applicable law, prior written
+permission from Verbal is required to:
+- sell, rent, sublicense or otherwise commercially exploit the Software;
+- publish or distribute modified versions;
+- redistribute copies of the Software, whether modified or unmodified; or
+- provide a publicly accessible hosted copy or a service using the Software.
+
+Sharing a link to the author's official repository or official download
+is permitted and does not constitute redistribution of the Software.
+
+4. Attribution
+
+Keep the author's existing attribution, copyright notices, this license
+and applicable third-party notices in copies and private modifications.
+Do not present the author's work as your own or imply that a modified
+version is endorsed by the author.
+
+5. Existing rights and exceptions
+
+Nothing here limits rights that applicable law does not allow a license
+to restrict. Nothing here overrides rights granted under GitHub's applicable
+Terms of Service, including viewing and forking a public repository through
+GitHub's functionality. Such rights do not by themselves grant permission
+for uses beyond their scope.
+
+Third-party license permissions and obligations remain intact.
+This license does not revoke permissions already validly granted for
+earlier versions or copies, including copies previously made available
+under the MIT License. Those copies remain subject to the terms under
+which they were obtained. This license does not retroactively prohibit
+commercial use authorized by those earlier permissions.
+
+It does not claim ownership of user-created settings or restrict sharing
+settings that do not redistribute the Software or separately restricted
+third-party material. Original aircraft backups and third-party files
+remain governed by their respective rights and terms.
+
+6. Simulation-only integration and warranty
+
+The Software is an unofficial flight-simulator radio integration.
+It modifies supported locally installed aircraft files and connects the
+simulator with the user's installed SRS software. Compatibility, radio
+synchronization, encryption controls, installation and restoration may
+be incomplete, fail, or change with third-party updates.
+
+It is not a certified aircraft system, an operational radio system,
+or a tool approved for real-world flight or communications.
+Simulator ENC/KEY features provide no assurance of real-world
+communications security.
+
+To the extent permitted by applicable law, the Software is provided
+"AS IS", without warranties of accuracy, fitness for a particular purpose
+or uninterrupted operation. No maintenance or support commitment is made.
+Nothing in this license excludes liability that cannot legally be excluded.
+
+7. Additional permission
+
+For publication, redistribution or commercial-use permission, contact
+Verbal81 through the official repository:
+https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD
+
+Any additional permission must be expressly granted in writing.
