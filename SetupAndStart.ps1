@@ -130,6 +130,10 @@ try{
         [void][Windows.Forms.MessageBox]::Show('Vorpruefung erfolgreich. Nichts gestartet.',$title)
         exit 0
     }
+    & $ps -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'DesktopShortcut.ps1')
+    if($LASTEXITCODE -ne 0){
+        [void][Windows.Forms.MessageBox]::Show('Einrichtung erfolgreich, Desktop-Verknuepfung konnte nicht erstellt werden. Du kannst SRS_STARTEN.cmd verwenden oder im Menue Desktop-Verknuepfung erstellen waehlen.',$title)
+    }
     & $ps -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'runtime\Launcher.ps1')
     if($LASTEXITCODE -ne 0){throw 'Patch ist eingerichtet, aber Bridge/SRS-Start wurde abgebrochen.'}
 }catch{

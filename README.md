@@ -29,12 +29,52 @@ Users should never disable their antivirus software to install the MOD.
 - DCS SimpleRadio Standalone 2.4.1.0
 - Windows PowerShell 5.1, 64-bit
 
-## Installation / Start
-1. Close MSFS 2024 and SRS.
-2. Run `START_v1.1m4.cmd`.
-3. Choose **Einrichtung / Start**.
-4. If asked for SRS, select the **CLIENT folder** containing `SR-ClientRadio.exe` directly.
-5. SRS and the EF-SRS Bridge start automatically. Connect SRS as usual, then start MSFS 2024.
+## Einmalige Einrichtung / First-time setup
+
+1. ZIP vollstaendig in einen dauerhaften Ordner entpacken. Diesen Ordner danach
+   behalten; die Desktop-Verknuepfung verweist darauf.
+2. MSFS 2024 und SRS schliessen.
+3. `START_v1.1m4.cmd` starten und **Einmalige Einrichtung / Reparatur** waehlen.
+4. Bei der SRS-Auswahl den **CLIENT-Ordner** waehlen, der
+   `SR-ClientRadio.exe` direkt enthaelt.
+5. Nach erfolgreicher Einrichtung wird **SRS-Mod starten** auf dem Desktop
+   angelegt. SRS und Bridge werden gestartet. Auf die Bereitschaftsmeldung
+   warten, SRS verbinden und danach MSFS 2024 starten.
+
+**Bereits eingerichtet?** Das aktuelle Paket vollstaendig entpacken, das Menue
+oeffnen und **Desktop-Verknuepfung erstellen** waehlen. Eine erneute
+Flugzeuginstallation ist dafuer nicht erforderlich. Eine vorhandene Verknuepfung
+aus einem anderen Mod-Ordner wird nicht automatisch ueberschrieben; bei einem
+Umzug die alte Verknuepfung selbst entfernen und neu erstellen.
+
+**Teststand:** Die neue Desktop-Verknuepfung und der Direktstart muessen noch unter Windows praktisch geprueft werden. Die bestehende Flugzeug- und Funklogik bleibt unveraendert.
+
+## Taeglicher Start / Daily start
+
+Nach einem PC-Neustart oder nach dem Beenden von SRS/Bridge:
+1. MSFS 2024 und SRS muessen geschlossen sein.
+2. Auf **SRS-Mod starten** auf dem Desktop doppelklicken.
+3. Auf die Bereitschaftsmeldung warten, SRS verbinden, dann MSFS starten.
+
+Der Direktstart oeffnet kein Einrichtungsmenue und veraendert keine
+Flugzeugdateien. Er prueft den installierten Patch und startet SRS mit der
+ENC/HOLD-Erweiterung sowie die Bridge. Das Bereitschaftsfenster bleibt erhalten.
+Ohne laufende Bridge werden Frequenzen nicht synchronisiert.
+
+Als Alternative funktioniert `SRS_STARTEN.cmd` im entpackten Mod-Ordner.
+Pfadwechsel, Reparatur und Deinstallation bleiben ueber `START_v1.1m4.cmd`
+erreichbar. Es wird kein Windows-Autostart eingerichtet.
+
+**EN:** Extract the entire package to a permanent folder and keep that folder.
+Run `START_v1.1m4.cmd` once and select **Einmalige Einrichtung / Reparatur**.
+Successful setup creates the **SRS-Mod starten** desktop shortcut. Existing
+users can select **Desktop-Verknuepfung erstellen** without reinstalling the
+aircraft patch. After restarting the PC or closing SRS/Bridge, close MSFS and
+SRS, double-click the shortcut, wait for the ready message, connect SRS, then
+start MSFS. Daily start does not run the installer or modify aircraft files.
+Use `SRS_STARTEN.cmd` as a fallback. Keep the extracted folder in place; if
+moving it, remove the old shortcut yourself and recreate it. No Windows
+autostart is installed.
 
 The installer verifies the supported aircraft state before writing anything. It creates a local verified backup and uses transactional replacement with rollback.
 

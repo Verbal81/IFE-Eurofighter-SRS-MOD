@@ -1,17 +1,17 @@
 {
   "product": "IFE Eurofighter SRS MOD",
   "version": "v1.1m4",
-  "status": "FINAL",
+  "status": "DIRECT_START_TEST",
   "files": {
-    "BUILD_INFO.json": "a9457bc539909b8ce431302da9f793e3ea5163b464fa13be91f2eabb95d9f569",
+    "BUILD_INFO.json": "4281e4b743982f6051b2c1502e8138cafd56bd1f28b4cecbdb7bc24f19e5afb5",
     "GeneratePayload.ps1": "966d4dca618a85da461f2cceee885201374995f35af33ad108f52e65cc0a556e",
-    "Menu.ps1": "2b11ba27c2beebcb72a5163aaa48bf3a73f30cce1addfd480144ebd6fb8c68d0",
-    "README.md": "d1fccd07aaff700bbe9a87c023420c9ab36c0ad835d033aa4bf9e7730b6d4657",
+    "Menu.ps1": "ae98c991819dfbd1f77a8014095c16da5528cee844291d1a19a3e0e36c48b6e9",
+    "README.md": "e56989de4b220faad8298c25007cec6286119753ed30e4bb99ab1b0cb3144cd8",
     "RELEASE_NOTES.txt": "c0ccffb1e5b1998cc012bfc1827b965167741938ca46ae33bdd03f3e38c7170b",
     "START_v1.1m4.cmd": "f05a5f433662fab18164c4e0bb8c5901e64094b7e64097c9d006ff621efeed70",
-    "SetupAndStart.ps1": "b8f48124987d00664edac2bd136a84a9dbd2c18ef75b58a33b65c04cda477ca4",
+    "SetupAndStart.ps1": "b1bf37201a633a35c266ba6ab62446d2676a2e4c8313f22b0c9499462909a2dd",
     "THIRD_PARTY_NOTICE.txt": "69ce4aaf7239c0ec538dbae8078d53516e21376b203297a9580b7c2fb6c4283a",
-    "Uninstall.ps1": "16d09657e8b6f7e45b4adf560716cb7ba128aace3835f9c4eb4d6260cf4e1abb",
+    "Uninstall.ps1": "abe0cac012b08630d8b5b0c3df45d9c1c08e28bf09fdf9a7327db5598a16fe1e",
     "aircraft/Installer.ps1": "6a1750240da157f10a4775451121dd0221c5595177fd3c81a65696b240262e4a",
     "aircraft/manifest.json": "9cc2133606973bfa9d3648a54623ba89846dd5915cd052ee0e012cbd861c4656",
     "patch_manifest.json": "430185786b13160209639a060dc359aad88a973a542747a1a9603292b4d8d983",
@@ -22,6 +22,9 @@
     "runtime/src/Link.cs": "249721f99ed4619bd4bfe41df81958f856a991460762f5757f5c22ca22a3bd60",
     "runtime/src/NativeSimConnect.cs": "4e94ad87614ec160b5eaabdeec7e56e4a3d3cd7cf0f6e43a7ef9d6df951b2661",
     "runtime/src/SrsHook.cs": "77a530e7e045531e51765cacc8195428560dd5877a09496a290b24a545c3299a",
-    "LICENSE": "93de1f5eadfa38f6249fc5f962b0b64695829171c0fe69a825f38558571b7469"
+    "LICENSE": "93de1f5eadfa38f6249fc5f962b0b64695829171c0fe69a825f38558571b7469",
+    "StartRadio.ps1": "5605ce3b1190cd3607b34c2daf12f18c41aeb47a62705affaf4521029f1fe367",
+    "DesktopShortcut.ps1": "1ea130bf5de2e4419e43a3310e0fe893dafe70c87dea425c758ff88bd35f59c4",
+    "SRS_STARTEN.cmd": "b34bf9d96a3fcd0d8eb0dfcfdc23fa4b66ad37ef2fcbf92804a4c7ecfd2d3288"
   }
 }

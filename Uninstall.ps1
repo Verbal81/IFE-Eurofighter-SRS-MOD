@@ -70,6 +70,8 @@ try{
     }
     foreach($name in $rel.Keys){if((Hash (Join-Path $package $rel[$name])) -ne [string]$manifest.supported_source.$name){throw "IFE-Originalhash nach Uninstall falsch: $name"}}
     foreach($p in @((Join-Path $data 'runtime-v11m4-finalrc2'),(Join-Path $data 'v11m4-finalrc2'))){if(Test-Path -LiteralPath $p){Remove-Item -LiteralPath $p -Recurse -Force -ErrorAction Stop}}
+    & (Join-Path $PSHOME 'powershell.exe') -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'DesktopShortcut.ps1') -Remove
+    if($LASTEXITCODE -ne 0){Write-Warning 'Desktop-Verknuepfung konnte nicht entfernt werden; bitte bei Bedarf manuell entfernen.'}
     foreach($p in @($settingsPath,(Join-Path $data 'launcher-v11m4-finalrc2.log'),(Join-Path $data 'launcher-v11m4-finalrc2-runtime.log'))){if(Test-Path -LiteralPath $p -PathType Leaf){Remove-Item -LiteralPath $p -Force -ErrorAction SilentlyContinue}}
     [void][Windows.Forms.MessageBox]::Show("EF-SRS v1.1m4 deinstalliert.`r`nDie drei IFE-XML-Dateien und layout.json wurden aus der verifizierten Originalsicherung wiederhergestellt.`r`n`r`nSicherheitskopie: $safe",$title)
 }catch{

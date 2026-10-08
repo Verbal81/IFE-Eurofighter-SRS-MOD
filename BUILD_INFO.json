@@ -1,7 +1,7 @@
 {
   "product": "IFE Eurofighter SRS MOD",
   "version": "v1.1m4",
-  "release_status": "FINAL",
+  "release_status": "DIRECT_START_TEST",
   "validation": {
     "clean_install_from_verified_ife_originals": true,
     "semantic_patch_outputs_verified": "3/3",
@@ -17,5 +17,12 @@
     "simconnect_dll_included": false
   },
   "compatibility_runtime_id": "finalrc2",
-  "compatibility_runtime_id_note": "Retained unchanged from the validated build so the tested Launcher/Link runtime path contract is not altered."
+  "compatibility_runtime_id_note": "Retained unchanged from the validated build so the tested Launcher/Link runtime path contract is not altered.",
+  "daily_start_extension": {
+    "desktop_shortcut": "SRS-Mod starten",
+    "aircraft_installation_on_daily_start": false,
+    "windows_autostart": false,
+    "windows_shortcut_and_daily_start_test": "pending",
+    "prior_validation_scope": "Existing v1.1m4 aircraft patch and runtime; new desktop/setup/menu integration awaits Windows verification."
+  }
 }
