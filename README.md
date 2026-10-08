@@ -53,3 +53,31 @@ The complete release cycle was successfully verified:
 Validated functions include UHF1/UHF2, frequency synchronization, volume, active radio, ENC/HOLD and SRS synchronization.
 
 No v1.1m3 runtime is required and no MSFS SDK installation is required.
+
+## License / Lizenz
+
+**By Verbal (GitHub: Verbal81).**
+
+**DE:** Für Veröffentlichungen unter der neuen [Lizenz](LICENSE) ab dem
+8. Oktober 2026 sind private, nichtkommerzielle Nutzung und private Änderungen
+kostenlos erlaubt, einschließlich nichtkommerzieller Multiplayer-Sitzungen.
+Verkauf, kommerzielle Nutzung, Weiterverbreitung (auch kostenlos) und
+Veröffentlichung veränderter Versionen benötigen vorherige schriftliche
+Erlaubnis. Links zum offiziellen Repository dürfen geteilt werden.
+Dies ist eine eigene Lizenz mit einsehbarem Quellcode, keine Open-Source-Lizenz.
+Rechte an zuvor gültig unter MIT veröffentlichten Kopien bleiben bestehen;
+die neue Lizenz untersagt deren zuvor erlaubten Verkauf nicht rückwirkend.
+Für Fremdmaterial gelten dessen eigene Bedingungen; siehe
+[THIRD_PARTY_NOTICE.txt](THIRD_PARTY_NOTICE.txt). Maßgeblich ist der vollständige
+englische Lizenztext.
+
+**EN:** Distributions under the new [license](LICENSE) from 8 October 2026
+permit free private, non-commercial use and private modifications, including
+non-commercial multiplayer simulator sessions. Sale, commercial use,
+redistribution (including free redistribution), and publication of modified
+versions require prior written permission. Sharing links to the official
+repository is allowed. This is a custom source-available license, not an
+open-source license. Previously valid MIT permissions remain intact; this
+change does not retroactively prohibit sale of earlier MIT-licensed copies.
+Third-party material remains governed by its own terms. See
+[THIRD_PARTY_NOTICE.txt](THIRD_PARTY_NOTICE.txt) and the full license for details.
