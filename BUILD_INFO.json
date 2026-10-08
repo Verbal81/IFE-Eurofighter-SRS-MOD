@@ -23,6 +23,7 @@
     "aircraft_installation_on_daily_start": false,
     "windows_autostart": false,
     "windows_shortcut_and_daily_start_test": "pending",
-    "prior_validation_scope": "Existing v1.1m4 aircraft patch and runtime; new desktop/setup/menu integration awaits Windows verification."
+    "prior_validation_scope": "Existing v1.1m4 aircraft patch and runtime; new desktop/setup/menu integration awaits Windows verification.",
+    "powershell_host_fix": "2026-10-08: canonical Windows PowerShell 5.1 x64 with PowerShell 7 handoff; Windows retest pending."
   }
 }

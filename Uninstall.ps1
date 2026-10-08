@@ -1,4 +1,19 @@
-﻿$ErrorActionPreference='Stop'
+﻿# Always run UI, COM and the .NET Framework bridge under 64-bit Windows PowerShell.
+$windowsDirectory=if([Environment]::Is64BitOperatingSystem -and -not [Environment]::Is64BitProcess){'Sysnative'}else{'System32'}
+$windowsPowerShell=Join-Path $env:SystemRoot ($windowsDirectory+'\WindowsPowerShell\v1.0\powershell.exe')
+if(-not (Test-Path -LiteralPath $windowsPowerShell -PathType Leaf)){
+    throw '64-Bit Windows PowerShell 5.1 wurde nicht gefunden.'
+}
+if($PSVersionTable.PSEdition -ne 'Desktop' -or $PSVersionTable.PSVersion.Major -ne 5 -or -not [Environment]::Is64BitProcess){
+    # These entry points have switch parameters only. Preserve enabled switches.
+    $forwardArgs=@()
+    foreach($key in $PSBoundParameters.Keys){
+        if([bool]$PSBoundParameters[$key]){$forwardArgs+=('-'+$key)}
+    }
+    & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $PSCommandPath @forwardArgs
+    exit $LASTEXITCODE
+}
+$ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
 Add-Type -AssemblyName System.Windows.Forms
 $title='IFE_Eurofighter_SRS_MOD v1.1m4 - Uninstall'
@@ -19,7 +34,7 @@ try{
     if(-not (Test-Path -LiteralPath $settingsPath -PathType Leaf)){throw 'v1.1m4 Einstellungen fehlen. Bitte zuerst Einrichtung / Start ausfuehren.'}
     $package=[IO.Path]::GetFullPath([string](Json $settingsPath).package_root).TrimEnd([char[]]'\/')
     # Stop our/legacy known bridge if present.
-    & (Join-Path $PSHOME 'powershell.exe') -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'runtime\Launcher.ps1') -StopOnly
+    & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'runtime\Launcher.ps1') -StopOnly
     if($LASTEXITCODE -ne 0){throw 'Bridge konnte nicht sicher beendet werden.'}
     $chosen=$null;$journal=$null
     $all=New-Object System.Collections.Generic.List[object]
@@ -70,7 +85,7 @@ try{
     }
     foreach($name in $rel.Keys){if((Hash (Join-Path $package $rel[$name])) -ne [string]$manifest.supported_source.$name){throw "IFE-Originalhash nach Uninstall falsch: $name"}}
     foreach($p in @((Join-Path $data 'runtime-v11m4-finalrc2'),(Join-Path $data 'v11m4-finalrc2'))){if(Test-Path -LiteralPath $p){Remove-Item -LiteralPath $p -Recurse -Force -ErrorAction Stop}}
-    & (Join-Path $PSHOME 'powershell.exe') -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'DesktopShortcut.ps1') -Remove
+    & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File (Join-Path $base 'DesktopShortcut.ps1') -Remove
     if($LASTEXITCODE -ne 0){Write-Warning 'Desktop-Verknuepfung konnte nicht entfernt werden; bitte bei Bedarf manuell entfernen.'}
     foreach($p in @($settingsPath,(Join-Path $data 'launcher-v11m4-finalrc2.log'),(Join-Path $data 'launcher-v11m4-finalrc2-runtime.log'))){if(Test-Path -LiteralPath $p -PathType Leaf){Remove-Item -LiteralPath $p -Force -ErrorAction SilentlyContinue}}
     [void][Windows.Forms.MessageBox]::Show("EF-SRS v1.1m4 deinstalliert.`r`nDie drei IFE-XML-Dateien und layout.json wurden aus der verifizierten Originalsicherung wiederhergestellt.`r`n`r`nSicherheitskopie: $safe",$title)

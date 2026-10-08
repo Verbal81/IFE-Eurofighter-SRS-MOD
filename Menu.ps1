@@ -1,8 +1,23 @@
-﻿$ErrorActionPreference='Stop'
+﻿# Always run UI, COM and the .NET Framework bridge under 64-bit Windows PowerShell.
+$windowsDirectory=if([Environment]::Is64BitOperatingSystem -and -not [Environment]::Is64BitProcess){'Sysnative'}else{'System32'}
+$windowsPowerShell=Join-Path $env:SystemRoot ($windowsDirectory+'\WindowsPowerShell\v1.0\powershell.exe')
+if(-not (Test-Path -LiteralPath $windowsPowerShell -PathType Leaf)){
+    throw '64-Bit Windows PowerShell 5.1 wurde nicht gefunden.'
+}
+if($PSVersionTable.PSEdition -ne 'Desktop' -or $PSVersionTable.PSVersion.Major -ne 5 -or -not [Environment]::Is64BitProcess){
+    # These entry points have switch parameters only. Preserve enabled switches.
+    $forwardArgs=@()
+    foreach($key in $PSBoundParameters.Keys){
+        if([bool]$PSBoundParameters[$key]){$forwardArgs+=('-'+$key)}
+    }
+    & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $PSCommandPath @forwardArgs
+    exit $LASTEXITCODE
+}
+$ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 [Windows.Forms.Application]::EnableVisualStyles()
-$ps=Join-Path $PSHOME 'powershell.exe'
+$ps=$windowsPowerShell
 $form=New-Object Windows.Forms.Form
 $form.Text='IFE_Eurofighter_SRS_MOD | v1.1m4'
 $form.ClientSize=New-Object Drawing.Size(520,640)

@@ -49,6 +49,8 @@ Umzug die alte Verknuepfung selbst entfernen und neu erstellen.
 
 **Teststand:** Die neue Desktop-Verknuepfung und der Direktstart muessen noch unter Windows praktisch geprueft werden. Die bestehende Flugzeug- und Funklogik bleibt unveraendert.
 
+**PowerShell:** Die Startskripte wechseln bei Aufruf aus PowerShell 7 automatisch zu 64-Bit Windows PowerShell 5.1. Zum normalen Start bitte die CMD-Dateien oder Desktop-Verknuepfung verwenden; die PS1-Dateien sind interne Bestandteile.
+
 ## Taeglicher Start / Daily start
 
 Nach einem PC-Neustart oder nach dem Beenden von SRS/Bridge:

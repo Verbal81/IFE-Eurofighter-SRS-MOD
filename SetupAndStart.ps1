@@ -1,4 +1,19 @@
 ﻿param([switch]$ChoosePaths,[switch]$CheckOnly)
+# Always run UI, COM and the .NET Framework bridge under 64-bit Windows PowerShell.
+$windowsDirectory=if([Environment]::Is64BitOperatingSystem -and -not [Environment]::Is64BitProcess){'Sysnative'}else{'System32'}
+$windowsPowerShell=Join-Path $env:SystemRoot ($windowsDirectory+'\WindowsPowerShell\v1.0\powershell.exe')
+if(-not (Test-Path -LiteralPath $windowsPowerShell -PathType Leaf)){
+    throw '64-Bit Windows PowerShell 5.1 wurde nicht gefunden.'
+}
+if($PSVersionTable.PSEdition -ne 'Desktop' -or $PSVersionTable.PSVersion.Major -ne 5 -or -not [Environment]::Is64BitProcess){
+    # These entry points have switch parameters only. Preserve enabled switches.
+    $forwardArgs=@()
+    foreach($key in $PSBoundParameters.Keys){
+        if([bool]$PSBoundParameters[$key]){$forwardArgs+=('-'+$key)}
+    }
+    & $windowsPowerShell -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $PSCommandPath @forwardArgs
+    exit $LASTEXITCODE
+}
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
 Add-Type -AssemblyName System.Windows.Forms
@@ -7,7 +22,7 @@ $base=Split-Path -Parent $MyInvocation.MyCommand.Path
 $data=Join-Path $env:LOCALAPPDATA 'EF-SRS'
 $settingsPath=Join-Path $data 'launcher-v11m4-finalrc2.json'
 $work=Join-Path $data 'v11m4-finalrc2\profile'
-$ps=Join-Path $PSHOME 'powershell.exe'
+$ps=$windowsPowerShell
 function Json([string]$p){ Get-Content -LiteralPath $p -Raw -Encoding UTF8 | ConvertFrom-Json }
 function SaveSettings([string]$package,[string]$srs){
     [IO.Directory]::CreateDirectory($data)|Out-Null
