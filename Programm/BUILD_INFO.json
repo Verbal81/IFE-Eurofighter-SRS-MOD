@@ -1,7 +1,7 @@
 {
   "product": "IFE Eurofighter SRS MOD",
   "version": "v1.1m4",
-  "release_status": "FRIENDLY_STARTER_TEST",
+  "release_status": "FINAL_USER_VERIFIED",
   "validation": {
     "clean_install_from_verified_ife_originals": true,
     "semantic_patch_outputs_verified": "3/3",
@@ -23,7 +23,7 @@
     "aircraft_installation_on_daily_start": false,
     "windows_autostart": false,
     "windows_shortcut_and_daily_start_test": "user confirmed 2026-10-08 after PowerShell host fix",
-    "prior_validation_scope": "Existing v1.1m4 aircraft patch and runtime; new desktop/setup/menu integration awaits Windows verification.",
+    "prior_validation_scope": "Existing v1.1m4 aircraft patch/runtime plus user-confirmed Windows daily start and user-friendly packaging on 2026-10-08.",
     "powershell_host_fix": "user confirmed working on Windows 2026-10-08"
   },
   "user_friendly_packaging": {
@@ -33,6 +33,7 @@
       "2_SRS_MOD_STARTEN.cmd",
       "3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd"
     ],
-    "windows_retest": "pending for folder layout, wrappers and shortcut retarget"
+    "windows_retest": "user confirmed working on Windows 2026-10-08",
+    "validation_source": "Author's explicit report in conversation; not an independent cross-system test."
   }
 }

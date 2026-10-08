@@ -19,7 +19,13 @@ BEREITS INSTALLIERT / DIESES UPDATE:
 Verknuepfung wird auf den neuen Mod-Ordner aktualisiert.
 Eine erneute Flugzeuginstallation ist nicht erforderlich.
 
-JEDES MAL ZUM FLIEGEN:
+DESKTOP-VERKNUEPFUNG:
+Die Einrichtung erstellt "SRS-Mod starten" automatisch auf dem Desktop.
+Falls sie fehlt: Datei 3 starten -> "Desktop-Verknuepfung erstellen".
+Nur die Verknuepfung gehoert auf den Desktop. Nicht die CMD-Datei allein
+verschieben! Den gesamten Mod-Ordner inklusive "Programm" behalten.
+
+JEDES MAL ZUM FLIEGEN / NACH JEDEM PC-NEUSTART:
 "SRS-Mod starten" auf dem Desktop doppelklicken.
 Oder: 2_SRS_MOD_STARTEN.cmd
 MSFS und SRS vorher schliessen. Auf die Bereitschaftsmeldung warten,
@@ -45,6 +51,6 @@ Kompatibilitaet: MSFS 2024, IFE Eurofighter 1.0.10, SRS 2.4.1.0.
 Inoffizieller Mod, nicht von IndiaFoxtEcho unterstuetzt.
 Repository: https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD
 
-Teststatus: Der vorherige Direktstart wurde vom Autor unter Windows bestaetigt.
-Die neue Ordnerstruktur, CMD-Einstiege und Verknuepfungsaktualisierung
-sind noch praktisch unter Windows zu pruefen.
+Teststatus (08.10.2026): Diese nutzerfreundliche Ausgabe wurde vom Autor
+unter Windows erfolgreich getestet und als funktionierend bestaetigt.
+Dies ist keine Garantie fuer jede Systemkonfiguration.

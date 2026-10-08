@@ -1,12 +1,12 @@
 {
   "product": "IFE Eurofighter SRS MOD",
   "version": "v1.1m4",
-  "status": "FRIENDLY_STARTER_TEST",
+  "status": "FINAL_USER_VERIFIED",
   "files": {
-    "Programm/BUILD_INFO.json": "13e3811a8bba1ade0f59a7f668d8adbe25f79621ad8d946b45a3389deffbcf72",
+    "Programm/BUILD_INFO.json": "9bba4aade8ed9025a81a882454938444790f8dad33d3d9e98f8dd41cc6e532fb",
     "Programm/GeneratePayload.ps1": "966d4dca618a85da461f2cceee885201374995f35af33ad108f52e65cc0a556e",
     "Programm/Menu.ps1": "258771735855ddb9f42d1867130fab2f17726b139bc475f4c66b03e0665679e7",
-    "README.md": "ec51de2b291b9dd8b0166a306c8ef82a9117a243f91cd342a942def9c1cab69c",
+    "README.md": "08e02cba69eb05ab7393217498d722226fd2ccf21a55ffb5886713d588f026d2",
     "Programm/RELEASE_NOTES.txt": "c0ccffb1e5b1998cc012bfc1827b965167741938ca46ae33bdd03f3e38c7170b",
     "Programm/SetupAndStart.ps1": "7779f23407c92e8d7fff05365bac72c773c7fbd8305d0ec481487068bd0ab8eb",
     "THIRD_PARTY_NOTICE.txt": "69ce4aaf7239c0ec538dbae8078d53516e21376b203297a9580b7c2fb6c4283a",
@@ -27,6 +27,6 @@
     "1_EINMALIG_EINRICHTEN.cmd": "395784c7855d36ecfc824ec59d327c88cc8dba469eabc990f9acded18f450f6c",
     "2_SRS_MOD_STARTEN.cmd": "1ec9ee674cf3091f3c90bb1e1b2069724a307f24c6f13812721736a3db7f3869",
     "3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd": "7529a9c56f3dededcfee22deb5ff4d7fab45c559f5a47694d6803d7ddadc294d",
-    "0_LIES_MICH.txt": "c74e100281a703192033d98ef2f648cf5043bd7e253a5825c00bab4fccd80df0"
+    "0_LIES_MICH.txt": "3d758e097aa030a258a84ce798c99d2e1fe704e70eec4678a268e6b4ba2af4d5"
   }
 }

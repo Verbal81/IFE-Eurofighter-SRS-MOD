@@ -67,6 +67,20 @@ SRS verbinden, dann MSFS starten.
 wird auf den neuen Mod-Ordner aktualisiert. Eine erneute Installation des
 Flugzeugpatches ist nicht erforderlich. Danach den neuen Ordner behalten.
 
+### Desktop-Verknüpfung: „SRS-Mod starten“
+
+Die Erstinstallation erstellt diese Verknüpfung automatisch auf dem Desktop.
+Falls sie fehlt oder du ein Update entpackt hast:
+**`3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd`** starten → **Desktop-Verknuepfung erstellen**.
+
+**Nach jedem PC-Neustart vor dem Fliegen auf „SRS-Mod starten“ doppelklicken.**
+Damit starten SRS und Bridge gemeinsam, ohne Einrichtungsmenü.
+Die Bereitschaftsmeldung abwarten, SRS verbinden und danach MSFS starten.
+
+**Wichtig:** Nur die Verknüpfung liegt auf dem Desktop. Den gesamten entpackten
+Mod-Ordner inklusive `Programm` behalten. Nicht nur eine CMD-Datei auf den
+Desktop verschieben – sie benötigt die Dateien im Mod-Ordner.
+
 ### Taeglicher Start
 
 1. MSFS und SRS schliessen.
@@ -90,9 +104,7 @@ reinstalling the aircraft patch. Close MSFS and SRS before starting; wait for
 the ready message, connect SRS, then start MSFS. Starting ordinary SRS alone
 does not start the bridge. Internal files are in `Programm`.
 
-**Teststatus:** Der vorherige Direktstart samt PowerShell-Korrektur wurde vom
-Autor unter Windows bestaetigt. Die neue Ordnerstruktur, CMD-Einstiege und
-Verknuepfungsaktualisierung stehen noch zur praktischen Windows-Pruefung an.
+**Teststatus (8. Oktober 2026):** Die neue nutzerfreundliche Ausgabe wurde vom Autor unter Windows erfolgreich getestet und als funktionierend bestaetigt. Das ist ein Funktionstest auf seinem Rechner, keine Garantie fuer jede Systemkonfiguration.
 
 The installer verifies the supported aircraft state before writing anything. It creates a local verified backup and uses transactional replacement with rollback.
 
