@@ -32,20 +32,63 @@ function Log([string]$Message) {
 }
 function Hash([string]$Path) { return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant() }
 function ReadJson([string]$Path) { return [IO.File]::ReadAllText($Path, $utf8) | ConvertFrom-Json }
-function AtomicReplace([string]$SourcePath, [string]$DestinationPath) {
-    # Windows PowerShell 5.1 can bind $null to an empty string for a .NET
-    # string argument. File.Replace rejects that as a backup filename.
-    # Supply a real, unique sibling path for every call, including journals.
+function AtomicReplace([string]$SourcePath, [string]$DestinationPath, [switch]$AllowRenameFallback) {
     $sourceFull = [IO.Path]::GetFullPath($SourcePath)
     $destinationFull = [IO.Path]::GetFullPath($DestinationPath)
     $swapBackup = $destinationFull + '.efsrs-swap-' + [Guid]::NewGuid().ToString('N') + '.bak'
+    $beforeSource = $null
+    $beforeDestination = $null
+    if ($AllowRenameFallback) {
+        $beforeSource = Hash $sourceFull
+        $beforeDestination = Hash $destinationFull
+    }
     try {
         [IO.File]::Replace($sourceFull, $destinationFull, $swapBackup)
     } catch {
-        throw ('Dateiaustausch fehlgeschlagen: ' + $destinationFull + "`r`n" + $_.Exception.Message)
+        $failure = $_.Exception
+        $nativeFailure = $failure
+        while ($nativeFailure.InnerException) { $nativeFailure = $nativeFailure.InnerException }
+        $code = $nativeFailure.HResult -band 0xffff
+        # ERROR_INVALID_PARAMETER leaves both names intact (ReplaceFile docs).
+        # Only aircraft writes with a verified permanent journal may use this.
+        # Never retry access-denied, sharing, or partially completed replacements.
+        if (-not $AllowRenameFallback -or $code -ne 87) {
+            throw ('Dateiaustausch fehlgeschlagen: ' + $destinationFull + "`r`nWin32-Code: " + $code + "`r`n" + $failure.Message)
+        }
+        if (-not [IO.Path]::GetDirectoryName($sourceFull).Equals([IO.Path]::GetDirectoryName($destinationFull), [StringComparison]::OrdinalIgnoreCase) -or
+            [IO.File]::Exists($swapBackup) -or
+            -not [IO.File]::Exists($sourceFull) -or -not [IO.File]::Exists($destinationFull)) {
+            throw ('Kein sicherer Ersatz-Dateiaustausch moeglich: ' + $destinationFull)
+        }
+        if ((Hash $sourceFull) -ne $beforeSource -or (Hash $destinationFull) -ne $beforeDestination) {
+            throw ('Dateien nach fehlgeschlagenem Austausch geaendert: ' + $destinationFull)
+        }
+        if (-not ('EFSRS.NativeRename' -as [type])) {
+            Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+namespace EFSRS {
+    public static class NativeRename {
+        [DllImport("kernel32.dll", EntryPoint = "MoveFileExW", CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool MoveFileEx(string source, string destination, uint flags);
     }
-    # The permanent verified snapshot is retained; this additional per-call
-    # backup is disposable only after File.Replace succeeds.
+}
+'@
+        }
+        Log ('ReplaceFile meldet Fehler 87; verwende Austausch im selben Ordner mit vorhandener Originalsicherung: ' + $destinationFull)
+        # REPLACE_EXISTING | WRITE_THROUGH. COPY_ALLOWED is deliberately absent.
+        # No delete-first step and no cross-volume copy; normal ACL checks apply.
+        if ((Hash $sourceFull) -ne $beforeSource -or (Hash $destinationFull) -ne $beforeDestination) {
+            throw ('Dateien vor Ersatz-Dateiaustausch geaendert: ' + $destinationFull)
+        }
+        if (-not [EFSRS.NativeRename]::MoveFileEx($sourceFull, $destinationFull, [uint32]9)) {
+            $moveCode = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+            $moveMessage = (New-Object ComponentModel.Win32Exception($moveCode)).Message
+            throw ('Ersatz-Dateiaustausch fehlgeschlagen: ' + $destinationFull + "`r`nWin32-Code: " + $moveCode + "`r`n" + $moveMessage)
+        }
+        if ((Hash $destinationFull) -ne $beforeSource) { throw ('Ersatz-Dateiaustausch nicht verifiziert: ' + $destinationFull) }
+    }
     if ([IO.File]::Exists($swapBackup)) {
         try { [IO.File]::Delete($swapBackup) }
         catch { Log ('Hinweis: temporaere Austausch-Sicherung erhalten: ' + $swapBackup) }
@@ -151,7 +194,7 @@ function ReplaceFile([string]$Destination, [string]$Source, [string]$ExpectedCur
     if ((Hash $temp) -ne (Hash $Source)) { throw ('Kopie konnte nicht verifiziert werden: ' + $Destination) }
     # Check once more immediately before the atomic per-file replacement.
     if ((Hash $Destination) -ne $ExpectedCurrentHash) { throw ('Zieldatei wurde zwischenzeitlich geaendert: ' + $Destination) }
-    AtomicReplace $temp $Destination
+    AtomicReplace $temp $Destination -AllowRenameFallback
     [IO.File]::SetLastWriteTimeUtc($Destination, [DateTime]::FromFileTimeUtc([long]::Parse($FileTime, $culture)))
 }
 function ValidateJournal($Journal, [string]$Directory, [string]$Root) {

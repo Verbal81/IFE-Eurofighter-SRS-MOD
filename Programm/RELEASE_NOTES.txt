@@ -33,3 +33,9 @@ DCS SimpleRadio Standalone 2.4.1.0
 - CreateNew verhindert das Ueberschreiben bestehender Dateien; SHA-256-Pruefungen bleiben erhalten.
 - Kopierfehler zeigen Quelle und Ziel; unvollstaendige neue Kopien werden entfernt.
 - Keine Aenderung an Patch-Rezepten, SRS/Bridge oder Windows-Berechtigungen.
+
+09.10.2026 - Zweite Korrektur: Dateiaustausch bei Win32-Fehler 87
+- Begrenzter Rename-Ersatz im selben Ordner, nur bei unveraenderten Dateien und Originalsicherung.
+- Keine Delete-first-Operation und kein Ersatzversuch bei Zugriffs- oder Sperrfehlern.
+- Austausch und Wiederherstellung nutzen weiterhin Journal und SHA-256.
+- Windows-Test des Ersatzwegs steht aus.
