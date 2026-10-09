@@ -6,7 +6,7 @@
     "Programm/BUILD_INFO.json": "914743a82ed41144c9a67532f04a8ce1b9a2841537bafb76c7eab47f7594dfbf",
     "Programm/GeneratePayload.ps1": "55bce036798cb49b47c8dcd1fcdf825003f59fa6af8b666ef24dfa9796efd138",
     "Programm/Menu.ps1": "258771735855ddb9f42d1867130fab2f17726b139bc475f4c66b03e0665679e7",
-    "README.md": "c6a7ecd7731c503cbb0cd631b7669bcf33f1b8ca04945c34147503f27485ddd8",
+    "README.md": "2c77cac33cc3e41454b826e0e8696640029b04f296efc396b5345ad39eabcd36",
     "Programm/RELEASE_NOTES.txt": "d0fba54224bcf44cfee82731bd1442969cfb7718af451925e1cdd2c5296a6bba",
     "Programm/SetupAndStart.ps1": "d15933b61ba24aae2e11f2b49c80e49b1446a86121935da7a74a94f18b24804b",
     "THIRD_PARTY_NOTICE.txt": "69ce4aaf7239c0ec538dbae8078d53516e21376b203297a9580b7c2fb6c4283a",
@@ -27,7 +27,7 @@
     "1_EINMALIG_EINRICHTEN.cmd": "395784c7855d36ecfc824ec59d327c88cc8dba469eabc990f9acded18f450f6c",
     "2_SRS_MOD_STARTEN.cmd": "1ec9ee674cf3091f3c90bb1e1b2069724a307f24c6f13812721736a3db7f3869",
     "3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd": "7529a9c56f3dededcfee22deb5ff4d7fab45c559f5a47694d6803d7ddadc294d",
-    "0_LIES_MICH.txt": "e78cdfbd29ac6c812ee2b10bb61515707031c18e12df3b9c161f56910200351d",
+    "0_LIES_MICH.txt": "e39a9e0c592d523f7d805bb15f5c5e1cadc3be3730e02b45d2ac7caf4eccb811",
     "IFE_Eurofighter_SRS_MOD_Anleitung.pdf": "dab774238ea0d74ce6c4a6bfac5756f1c8aeace91da5f5cb1559bcc8744e3e75",
     "docs/images/eurofighter-srs-cockpit.jpg": "e06b0f4dbe9790122bc1caa4dedd6d04355386d33570d2a39960d031afe3b296",
     "Programm/tests/verify_compatibility.py": "f9e729d840c96bcc9ad1819e792d8dd41b89632b184aae46b7a3c2fa64d6d2dd"

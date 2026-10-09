@@ -175,3 +175,9 @@ Bei der bisherigen Meldung „Die angegebene Datei konnte nicht verschluesselt w
 ### Dateiaustausch bei Fehler 87
 
 Falls Windows den bisherigen Austausch (`File.Replace`) mit „Falscher Parameter“ / Fehler 87 ablehnt, versucht die Einrichtung nun `MoveFileExW` mit Ersetzen im selben Ordner. Voraussetzung sind unveraenderte Quell- und Zieldateien, die vorhandene verifizierte Originalsicherung und das Installationsjournal. Andere Fehler loesen keinen solchen Ersatzversuch aus. Windows-Zugriffsrechte werden weiterhin geprueft. Der Ersatz uebernimmt die Attribute der temporaeren Datei statt die Metadaten des alten Ziels zusammenzufuehren. Eine vorherige Loeschung des Ziels oder ein Kopieren zwischen Laufwerken findet nicht statt. Die Funktion ist noch nicht auf dem betroffenen Windows-PC bestaetigt.
+
+### Verknuepfung an einem anderen Ort
+
+Die erzeugte Windows-Verknuepfung **`SRS-Mod starten.lnk`** enthaelt einen vollstaendigen Startpfad und ein festes Arbeitsverzeichnis. Sie kann daher auch in einen anderen Ordner kopiert oder verschoben werden. Der komplette entpackte Mod-Ordner muss am gespeicherten Ort erhalten bleiben. **Nicht die CMD- oder PS1-Datei allein kopieren oder verschieben.**
+
+Nach einem Update in einen neuen Mod-Ordner zuerst mit `3_EINSTELLUNGEN_UND_DEINSTALLATION.cmd` die Desktop-Verknuepfung neu erstellen lassen. Kopien der Verknuepfung an anderen Orten danach durch eine frische Kopie ersetzen: Die Einrichtung aktualisiert nur die Desktop-Verknuepfung. Falls eine echte kopierte LNK trotzdem nicht startet, die Fehlermeldung und unter Eigenschaften die Felder „Ziel“ und „Ausfuehren in“ pruefen.

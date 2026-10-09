@@ -22,8 +22,15 @@ Eine erneute Flugzeuginstallation ist nicht erforderlich.
 DESKTOP-VERKNUEPFUNG:
 Die Einrichtung erstellt "SRS-Mod starten" automatisch auf dem Desktop.
 Falls sie fehlt: Datei 3 starten -> "Desktop-Verknuepfung erstellen".
-Nur die Verknuepfung gehoert auf den Desktop. Nicht die CMD-Datei allein
-verschieben! Den gesamten Mod-Ordner inklusive "Programm" behalten.
+Die echte Windows-Verknuepfung "SRS-Mod starten.lnk" darf auch in einen
+anderen Ordner kopiert oder verschoben werden. Sie enthaelt den vollstaendigen
+Startpfad. Nicht die CMD- oder PS1-Datei allein kopieren oder verschieben!
+Den gesamten Mod-Ordner inklusive "Programm" am bisherigen Ort behalten.
+Bei einem Update auf einen neuen Mod-Ordner die Desktop-Verknuepfung mit
+Datei 3 neu erstellen lassen. Kopien an anderen Orten danach durch eine
+neue Kopie dieser Desktop-Verknuepfung ersetzen; sie werden nicht automatisch
+aktualisiert. Falls eine kopierte LNK nicht startet: unter Eigenschaften
+die Felder "Ziel" und "Ausfuehren in" sowie die Fehlermeldung pruefen.
 
 JEDES MAL ZUM FLIEGEN / NACH JEDEM PC-NEUSTART:
 "SRS-Mod starten" auf dem Desktop doppelklicken.
