@@ -27,3 +27,9 @@ Compatibility
 Microsoft Flight Simulator 2024
 IndiaFoxtEcho Eurofighter 1.0.10
 DCS SimpleRadio Standalone 2.4.1.0
+
+09.10.2026 - Kopierkorrektur fuer EFS-Dateien (Windows-Bestaetigung ausstehend)
+- Sicherungen und temporaere Dateien kopieren Inhalt statt Quell-Verschluesselungsattribute.
+- CreateNew verhindert das Ueberschreiben bestehender Dateien; SHA-256-Pruefungen bleiben erhalten.
+- Kopierfehler zeigen Quelle und Ziel; unvollstaendige neue Kopien werden entfernt.
+- Keine Aenderung an Patch-Rezepten, SRS/Bridge oder Windows-Berechtigungen.

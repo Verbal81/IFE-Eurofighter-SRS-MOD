@@ -114,11 +114,40 @@ function AssertNoReparseBelowRoot([string]$Root, [string]$Path) {
         }
     }
 }
+function CopyVerifiedBytes([string]$Source, [string]$Destination) {
+    # Copy content, not source EFS attributes. Files inherit the destination
+    # directory's protection. The caller verifies SHA-256 before any commit.
+    # CreateNew retains File.Copy(..., false)'s no-overwrite guarantee.
+    $inputStream = $null
+    $outputStream = $null
+    $created = $false
+    $complete = $false
+    try {
+        $inputStream = [IO.File]::Open($Source, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+        $outputStream = [IO.File]::Open($Destination, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
+        $created = $true
+        $inputStream.CopyTo($outputStream)
+        $outputStream.Flush($true)
+        $outputStream.Dispose()
+        $outputStream = $null
+        $inputStream.Dispose()
+        $inputStream = $null
+        $complete = $true
+    } catch {
+        throw ('Dateikopie fehlgeschlagen.' + "`r`nQuelle: " + $Source + "`r`nZiel: " + $Destination + "`r`n" + $_.Exception.Message)
+    } finally {
+        if ($outputStream) { $outputStream.Dispose() }
+        if ($inputStream) { $inputStream.Dispose() }
+        if ($created -and -not $complete -and [IO.File]::Exists($Destination)) {
+            try { [IO.File]::Delete($Destination) } catch {}
+        }
+    }
+}
 function ReplaceFile([string]$Destination, [string]$Source, [string]$ExpectedCurrentHash, [string]$FileTime) {
     if ((Hash $Destination) -ne $ExpectedCurrentHash) { throw ('Datei wurde zwischenzeitlich geaendert: ' + $Destination) }
     $temp = $Destination + '.efsrs-' + [Guid]::NewGuid().ToString('N') + '.tmp'
     $pendingTemps.Add($temp)
-    [IO.File]::Copy($Source, $temp, $false)
+    CopyVerifiedBytes $Source $temp
     if ((Hash $temp) -ne (Hash $Source)) { throw ('Kopie konnte nicht verifiziert werden: ' + $Destination) }
     # Check once more immediately before the atomic per-file replacement.
     if ((Hash $Destination) -ne $ExpectedCurrentHash) { throw ('Zieldatei wurde zwischenzeitlich geaendert: ' + $Destination) }
@@ -307,7 +336,7 @@ try {
         if ((Hash $plan.destination) -ne $plan.original_sha256) { throw ('Ziel seit Vorpruefung geaendert: ' + $plan.path) }
         $backup = Join-Path $transactionDirectory ('original/' + $plan.path)
         [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($backup)) | Out-Null
-        [IO.File]::Copy($plan.destination, $backup, $false)
+        CopyVerifiedBytes $plan.destination $backup
         if ((Hash $backup) -ne $plan.original_sha256) { throw ('Sicherung nicht verifiziert: ' + $plan.path) }
     }
     $transaction = [pscustomobject]@{ version=$version; package_root=$root; state='prepared'; files=@($plans | Select-Object -Property @('path', 'original_sha256', 'new_sha256', 'original_filetime', 'new_filetime')) }

@@ -165,3 +165,9 @@ open-source license. Previously valid MIT permissions remain intact; this
 change does not retroactively prohibit sale of earlier MIT-licensed copies.
 Third-party material remains governed by its own terms. See
 [THIRD_PARTY_NOTICE.txt](THIRD_PARTY_NOTICE.txt) and the full license for details.
+
+### Kopierkorrektur vom 09.10.2026
+
+Die Einrichtung kopiert Sicherungen und temporaere Dateien als Dateiinhalt, ohne die EFS-Verschluesselungsattribute der Quelle zu uebertragen. Neue Dateien erben den Schutz ihres Zielordners; die Originaldateien werden nicht pauschal entschluesselt und Windows-Berechtigungen werden nicht geaendert. SHA-256-Pruefung, atomarer Austausch und Wiederherstellung bleiben erhalten. Kopierfehler nennen jetzt Quelle und Ziel. Die Korrektur ist noch nicht auf dem betroffenen Windows-PC bestaetigt.
+
+Bei der bisherigen Meldung „Die angegebene Datei konnte nicht verschluesselt werden“: aktuelles ZIP in einen neuen dauerhaften Ordner entpacken, MSFS und SRS schliessen und `1_EINMALIG_EINRICHTEN.cmd` erneut ausfuehren. Keine vorherige Deinstallation erforderlich. Ein `EPERM`-Fehler des separaten VFR-Charts-Installers ist damit nicht behoben.
