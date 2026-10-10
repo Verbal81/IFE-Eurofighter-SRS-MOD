@@ -1,0 +1,27 @@
+name: Verify mod package and simulator selection
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows-checks:
+    runs-on: windows-latest
+    steps:
+      - name: Keep repository bytes unchanged
+        shell: pwsh
+        run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parse PowerShell and test simulator selection
+        shell: powershell
+        run: .\Programm\tests\verify_simulator_support.ps1
+      - name: Verify patch profiles
+        shell: powershell
+        run: python .\Programm\tests\verify_compatibility.py
+      - name: Verify distributed file hashes
+        shell: powershell
+        run: python .\Programm\tests\verify_package_hashes.py

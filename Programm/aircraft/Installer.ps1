@@ -121,7 +121,7 @@ function AssertClosed {
     $running = @(Get-Process -ErrorAction SilentlyContinue | Where-Object {
         $_.ProcessName -match '^(FlightSimulator|FlightSimulator2024|SR-ClientRadio)$'
     })
-    if ($running.Count -gt 0) { throw 'Bitte MSFS 2024 und SRS komplett schliessen und EF-SRS.exe erneut starten. EAM muss vorher nicht manuell getrennt werden.' }
+    if ($running.Count -gt 0) { throw 'Bitte MSFS 2020 / 2024 und SRS komplett schliessen und EF-SRS.exe erneut starten. EAM muss vorher nicht manuell getrennt werden.' }
 }
 function AssertPayloadStructure([string]$Path, [string]$Relative) {
     AssertXml $Path
@@ -437,7 +437,7 @@ try {
         if ($createdBridge.HasExited) { throw 'Bridge nach dem Start beendet. Patch installiert; MSFS noch nicht starten.' }
     } elseif (-not (BridgeReady $ready $existing[0])) { throw 'Vorhandene Bridge ist nicht mehr bereit. Patch installiert; MSFS noch nicht starten.' }
     Log 'SRS 2.4.1.0 gestartet; Bridge laeuft und wartet auf MSFS.'
-    [void][System.Windows.Forms.MessageBox]::Show("EF-SRS ist bereit.`r`nSRS 2.4.1.0 gestartet.`r`nBridge laeuft und wartet auf MSFS.`r`n`r`nIn SRS wie gewohnt Server und EAM verbinden.`r`nDanach kannst du MSFS 2024 starten.", $version)
+    [void][System.Windows.Forms.MessageBox]::Show("EF-SRS ist bereit.`r`nSRS 2.4.1.0 gestartet.`r`nBridge laeuft und wartet auf MSFS.`r`n`r`nIn SRS wie gewohnt Server und EAM verbinden.`r`nDanach kannst du MSFS starten.", $version)
 } catch {
     $message = $_.Exception.Message
     if ($transaction -and $transaction.state -eq 'committed') { $message = "Patch und Layout sind installiert und verifiziert.`r`n" + $message }

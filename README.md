@@ -1,12 +1,14 @@
 # IFE Eurofighter SRS MOD — v1.1m4
 
-**By Verbal81 · MSFS 2024 · IFE Eurofighter · SRS**
+**By Verbal81 · MSFS 2024 / MSFS 2020 (Test) · IFE Eurofighter · SRS**
 
 ## [⬇ ZIP HERUNTERLADEN](https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD/archive/refs/heads/main.zip)
 
+**Neu: [MSFS-2020-Testanleitung](FS2020_TESTANLEITUNG.md)** — Simulator-Auswahl, passende SimConnect-DLL und Wechsel zwischen 2020/2024. FS2020-Funkbetrieb ist noch nicht praktisch bestaetigt.
+
 ## [📖 PDF-ANLEITUNG: INSTALLATION UND BEDIENUNG](IFE_Eurofighter_SRS_MOD_Anleitung.pdf)
 
-Die fünfseitige Anleitung enthält Erstinstallation, Update, Desktop-Verknüpfung, täglichen Start, Cockpitbedienung und Wiederherstellung. Sie liegt auch direkt im ZIP. Auf der PDF-Seite bei Bedarf **Download raw file** wählen.
+Die fünfseitige PDF beschreibt die bisherige FS2024-Ausgabe und enthält Erstinstallation, Update, Desktop-Verknüpfung, täglichen Start, Cockpitbedienung und Wiederherstellung. Sie liegt auch direkt im ZIP. Auf der PDF-Seite bei Bedarf **Download raw file** wählen.
 
 **Neu installieren:** `1_EINMALIG_EINRICHTEN.cmd`  
 **Zum Fliegen:** Desktop-Verknuepfung **SRS-Mod starten**  
@@ -42,7 +44,7 @@ Users should never disable their antivirus software to install the MOD.
 
 
 ## Compatibility
-- Microsoft Flight Simulator 2024
+- Microsoft Flight Simulator 2024; zusaetzlich MSFS 2020 als Testunterstuetzung ([Zusatzanleitung](FS2020_TESTANLEITUNG.md))
 - IndiaFoxtEcho Eurofighter 1.0.9 und 1.0.10 (geprüfte XML-Dateistände; Erkennung über Prüfsummen)
 - DCS SimpleRadio Standalone 2.4.1.0
 - Windows PowerShell 5.1, 64-bit
@@ -66,6 +68,8 @@ Die internen Dateien unter `Programm` nicht einzeln starten.
 | Kurze Anleitung lesen | **`0_LIES_MICH.txt`** |
 
 ### Erstinstallation
+
+Bei neuer Einrichtung den Simulator waehlen. Bestehende Einstellungen bleiben standardmaessig bei MSFS 2024. Fuer MSFS 2020 bei vorhandener Einrichtung ueber Datei 3 **Simulator, Flugzeug- oder SRS-Ordner aendern** waehlen. Es gilt jeweils die zuletzt eingerichtete Auswahl.
 
 MSFS und SRS schliessen, dann **`1_EINMALIG_EINRICHTEN.cmd`** starten.
 Bei Bedarf Eurofighter-Ordner und SRS-CLIENT-Ordner auswaehlen.

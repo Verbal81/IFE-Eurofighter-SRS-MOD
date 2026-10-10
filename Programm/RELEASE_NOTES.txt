@@ -39,3 +39,12 @@ DCS SimpleRadio Standalone 2.4.1.0
 - Keine Delete-first-Operation und kein Ersatzversuch bei Zugriffs- oder Sperrfehlern.
 - Austausch und Wiederherstellung nutzen weiterhin Journal und SHA-256.
 - Windows-Test des Ersatzwegs steht aus.
+
+10.10.2026 - FS2020-Testunterstuetzung
+- Neue Simulator-Auswahl bei Erstinstallation und unter Datei 3 / Pfade aendern.
+- Getrennte Store-/Xbox-, Steam- und UserCfg-Suchpfade fuer 2020 und 2024.
+- Native x64-SimConnect-DLL aus eigener Installation/SDK, bei Bedarf manuell auswaehlbar; Auswahl wird gespeichert.
+- Vorhandene Einstellungen ohne Simulator-Feld behalten MSFS 2024.
+- Ein gemeinsames Profil; fuer Simulator-Wechsel erneut Pfade waehlen.
+- Gelieferte 1.0.10-XML-Dateien entsprechen exakt dem bekannten gepatchten Profil; Patch-Rezepte unveraendert.
+- Teststatus: kein bestaetigter FS2020-Flugtest. FS2020_TESTANLEITUNG.md beachten.

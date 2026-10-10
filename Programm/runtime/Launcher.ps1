@@ -61,7 +61,7 @@ function ReadSrsBundleRuntime([string]$Exe) {
 }
 function AssertClosed {
     $running = @(Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessName -match '^(FlightSimulator|FlightSimulator2024|SR-ClientRadio)$' })
-    Require ($running.Count -eq 0) 'Bitte MSFS 2024 und SRS komplett schliessen und START.cmd erneut starten.'
+    Require ($running.Count -eq 0) 'Bitte MSFS 2020 / 2024 und SRS komplett schliessen und START.cmd erneut starten.'
 }
 function BridgeProcesses([bool]$IncludeLegacy) {
     $efRoot = [regex]::Escape((Join-Path $dataRoot 'runtime-v11'))
@@ -85,66 +85,57 @@ function StopKnownBridges([bool]$IncludeLegacy, $Manifest) {
         }
     }
 }
-function FindInstalledSimConnect {
+function FindInstalledSimConnect([string]$Simulator, $Settings) {
+    $spec = GetSimulatorSpec $Simulator
     $candidates = New-Object System.Collections.Generic.List[string]
-
-    # Microsoft Store / Xbox package: query the registered app installation, not Carlo-specific paths.
+    if ($Settings.PSObject.Properties['simconnect_path'] -and $Settings.simconnect_path) {
+        $candidates.Add([string]$Settings.simconnect_path)
+    }
+    $appRoots = New-Object System.Collections.Generic.List[string]
     try {
-        $apps=@(Get-AppxPackage -Name 'Microsoft.Limitless*' -ErrorAction SilentlyContinue)
-        foreach($app in $apps) {
-            if($app.InstallLocation) {
-                $candidates.Add((Join-Path ([string]$app.InstallLocation) 'SimConnect_internal.dll'))
-            }
+        foreach ($app in @(Get-AppxPackage -Name $spec.AppPattern -ErrorAction SilentlyContinue)) {
+            if ($app.InstallLocation) { $appRoots.Add([string]$app.InstallLocation) }
         }
     } catch {}
-
-    # Steam default and registered Steam root.
-    $steamRoots=New-Object System.Collections.Generic.List[string]
+    $steamRoots = New-Object System.Collections.Generic.List[string]
     try {
         $sp=(Get-ItemProperty 'HKCU:\Software\Valve\Steam' -ErrorAction Stop).SteamPath
         if($sp){$steamRoots.Add([string]$sp)}
     } catch {}
     $steamRoots.Add((Join-Path ${env:ProgramFiles(x86)} 'Steam'))
+    $libraries = New-Object System.Collections.Generic.List[string]
     foreach($steam in $steamRoots | Select-Object -Unique) {
-        foreach($game in @('MicrosoftFlightSimulator2024','Microsoft Flight Simulator 2024')) {
-            $candidates.Add((Join-Path $steam ('steamapps\common\'+$game+'\SimConnect_internal.dll')))
-        }
+        $libraries.Add($steam)
         $vdf=Join-Path $steam 'steamapps\libraryfolders.vdf'
         if(Test-Path -LiteralPath $vdf -PathType Leaf) {
             try {
                 foreach($line in Get-Content -LiteralPath $vdf -ErrorAction Stop) {
                     if($line -match '"path"\s+"([^"]+)"') {
-                        $lib=$Matches[1] -replace '\\\\','\'
-                        foreach($game in @('MicrosoftFlightSimulator2024','Microsoft Flight Simulator 2024')) {
-                            $candidates.Add((Join-Path $lib ('steamapps\common\'+$game+'\SimConnect_internal.dll')))
-                        }
+                        $libraries.Add(($Matches[1] -replace '\\\\','\'))
                     }
                 }
             } catch {}
         }
     }
-
+    foreach($p in @(GetSimConnectCandidates $Simulator ($appRoots.ToArray()) ($libraries.ToArray()))) { $candidates.Add($p) }
     foreach($candidate in $candidates | Select-Object -Unique) {
-        try {
-            if([IO.File]::Exists($candidate)) {
-                # Verify we can actually read the user's installed file.
-                $h=Hash $candidate
-                return [pscustomobject]@{Path=[IO.Path]::GetFullPath($candidate);SHA256=$h;Source='MSFS 2024 installation'}
-            }
-        } catch {}
+        if(TestNativeSimConnect $candidate) {
+            return [pscustomobject]@{Path=[IO.Path]::GetFullPath($candidate);SHA256=(Hash $candidate);Source=$spec.Label}
+        }
     }
-
-    # Manual fallback for custom Steam/Xbox locations.
     [void][Windows.Forms.MessageBox]::Show(
-        "SimConnect_internal.dll wurde nicht automatisch gefunden.`r`n`r`nBitte jetzt den MSFS-2024-Installationsordner waehlen (NICHT Community).`r`nDarin muss SimConnect_internal.dll liegen.`r`n`r`nEs wird nur Ihre lokal installierte MSFS-Datei verwendet; sie ist nicht Bestandteil dieses Mods.",
-        'EF-SRS v1.1m4 - MSFS 2024 SimConnect')
-    $dlg=New-Object Windows.Forms.FolderBrowserDialog
-    $dlg.Description='MSFS-2024-Installationsordner waehlen - SimConnect_internal.dll muss direkt darin liegen.'
-    $dlg.ShowNewFolderButton=$false
-    if($dlg.ShowDialog() -ne [Windows.Forms.DialogResult]::OK){throw 'MSFS-2024-Installationsordner wurde nicht ausgewaehlt.'}
-    $manual=Join-Path $dlg.SelectedPath 'SimConnect_internal.dll'
-    Require ([IO.File]::Exists($manual)) 'SimConnect_internal.dll wurde im ausgewaehlten MSFS-2024-Ordner nicht gefunden.'
-    return [pscustomobject]@{Path=[IO.Path]::GetFullPath($manual);SHA256=(Hash $manual);Source='manuell gewaehlte MSFS 2024 installation'}
+        ($spec.Label+": Native 64-Bit-SimConnect-DLL wurde nicht gefunden.`r`n`r`nBitte SimConnect_internal.dll oder SimConnect.dll aus der eigenen "+$spec.Label+"-Installation auswaehlen. Fuer MSFS 2020 kann die native Datei aus dessen SDK verwendet werden: SimConnect SDK\lib\SimConnect.dll.`r`n`r`nNicht Microsoft.FlightSimulator.SimConnect.dll und nicht eine DLL aus dem anderen Simulator waehlen. Es wird keine Microsoft-DLL mit diesem Mod verteilt."),
+        'EF-SRS - SimConnect auswaehlen')
+    $dlg=New-Object Windows.Forms.OpenFileDialog
+    try {
+        $dlg.Title=$spec.Label+' - native 64-Bit-SimConnect-DLL auswaehlen'
+        $dlg.Filter='Native SimConnect-DLL|SimConnect_internal.dll;SimConnect.dll'
+        $dlg.CheckFileExists=$true
+        if($dlg.ShowDialog() -ne [Windows.Forms.DialogResult]::OK){throw 'SimConnect-Auswahl abgebrochen.'}
+        $manual=$dlg.FileName
+        Require (TestNativeSimConnect $manual) 'Keine native 64-Bit-SimConnect-DLL. Bitte die passende Datei aus der eigenen Simulator-Installation oder dem zugehoerigen SDK waehlen.'
+        return [pscustomobject]@{Path=[IO.Path]::GetFullPath($manual);SHA256=(Hash $manual);Source=$spec.Label}
+    } finally { $dlg.Dispose() }
 }
 function StartScoped([string]$File, [string]$Arguments, [string]$WorkingDirectory, [bool]$Hook, [int]$Radio1, [int]$Radio2) {
     $start = New-Object Diagnostics.ProcessStartInfo
@@ -201,7 +192,10 @@ try {
     }
     $settingsPath = Join-Path $dataRoot 'launcher-v11m4-finalrc2.json'
     Require ([IO.File]::Exists($settingsPath)) 'v1.1m4-Pfade fehlen. Bitte zuerst Einrichtung / Start oder Pfade neu waehlen.'
+    . (Join-Path $PSScriptRoot 'SimulatorSupport.ps1')
     $settings = Json $settingsPath
+    $simulator = GetSimulatorId $settings
+    Log ('Ausgewaehlter Simulator: MSFS ' + $simulator)
     $package = [IO.Path]::GetFullPath([string]$settings.package_root)
     $srsExe = [IO.Path]::GetFullPath([string]$settings.srs_client)
     $srsDir = [IO.Path]::GetDirectoryName($srsExe)
@@ -267,8 +261,12 @@ try {
     $baseline += [pscustomobject]@{ path=$configPath; sha256=(Hash $configPath) }
     foreach ($inputPath in $srsInputs) { $baseline += [pscustomobject]@{ path=$inputPath; sha256=(Hash $inputPath) } }
 
-    $sim = FindInstalledSimConnect
-    Log ('SimConnect aus lokal installiertem MSFS 2024: ' + $sim.Path)
+    $sim = FindInstalledSimConnect $simulator $settings
+    Log ('SimConnect fuer ' + $sim.Source + ': ' + $sim.Path)
+    if (-not $CheckOnly) {
+        $settings | Add-Member -MemberType NoteProperty -Name simconnect_path -Value $sim.Path -Force
+        [IO.File]::WriteAllText($settingsPath, ($settings | ConvertTo-Json -Depth 10), $utf8)
+    }
     $baseline += [pscustomobject]@{ path=$sim.Path; sha256=$sim.SHA256 }
 
     $token = [Guid]::NewGuid().ToString('N')
@@ -276,11 +274,11 @@ try {
     Require (-not [IO.Directory]::Exists($session)) 'Sitzungsordner existiert bereits.'
     [IO.Directory]::CreateDirectory($session) | Out-Null
     # Local private copy only from the user's own MSFS installation; nothing is shipped in this ZIP.
-    Copy-Item -LiteralPath $sim.Path -Destination (Join-Path $session 'SimConnect.dll')
+    [IO.File]::WriteAllBytes((Join-Path $session 'SimConnect.dll'), [IO.File]::ReadAllBytes($sim.Path))
     Require ($sim.SHA256 -eq (Hash (Join-Path $session 'SimConnect.dll'))) 'Lokale SimConnect-Kopie konnte nicht verifiziert werden.'
     $baseline | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $session 'baseline.json') -Encoding UTF8
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'RunBridge.ps1') -Destination (Join-Path $session 'RunBridge.ps1')
-    Log 'v1.1m4 XML/Layout und SRS-Version geprueft. Verwende SimConnect aus MSFS 2024; kompiliere Bridge + ENC/HOLD ...'
+    Log ('v1.1m4 XML/Layout und SRS-Version geprueft. Verwende SimConnect fuer MSFS '+$simulator+'; kompiliere Bridge + ENC/HOLD ...')
     $hookDll = Join-Path $session 'EFSRSHook.dll'
     Add-Type -Path @((Join-Path $PSScriptRoot 'src\Link.cs'), (Join-Path $PSScriptRoot 'src\SrsHook.cs')) -OutputAssembly $hookDll -OutputType Library
     $hook = [Reflection.Assembly]::LoadFrom($hookDll)

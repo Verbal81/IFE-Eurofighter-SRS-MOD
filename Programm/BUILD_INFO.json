@@ -48,5 +48,15 @@
       "windows_install_start_restore": "pending user test"
     },
     "prior_1_0_10_validation": "retained; existing patch recipe and radio outputs unchanged"
+  },
+  "validation_scope": "Historical MSFS 2024 results; these flags do not validate the new MSFS 2020 extension.",
+  "simulator_support": {
+    "default_for_legacy_settings": "2024",
+    "configured_profile_count": 1,
+    "msfs_2024": "prior user-confirmed aircraft/SRS behavior; new simulator detection changes require regression test",
+    "msfs_2020": "experimental; practical installation, radio, ENC/HOLD and restart test pending",
+    "provided_1_0_10_files": "3/3 exact match to existing patched output hashes; no original files in supplied ZIP",
+    "simconnect": "User-owned native x64 DLL, selected simulator only; may require MSFS 2020 SDK if absent from installation",
+    "new_windows_tests": "Programm/tests/verify_simulator_support.ps1; tests do not start a simulator or aircraft"
   }
 }

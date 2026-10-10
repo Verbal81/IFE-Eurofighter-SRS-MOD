@@ -4,6 +4,15 @@ IFE EUROFIGHTER SRS MOD | By Verbal81
 ZIP zuerst vollstaendig entpacken. Nicht im Archiv starten.
 Den gesamten entpackten Ordner dauerhaft behalten.
 
+SIMULATOR WAEHLEN
+-----------------
+MSFS 2020 ist neue Testunterstuetzung; der praktische Funk-Test steht aus.
+Bei neuer Einrichtung den Simulator auswaehlen. Bestehende Einstellungen
+bleiben bei MSFS 2024. Fuer MSFS 2020 oder einen Simulator-Wechsel:
+Datei 3 -> "Simulator, Flugzeug- oder SRS-Ordner aendern".
+Es gibt ein gemeinsames Einstellungsprofil; der taegliche Start verwendet
+die zuletzt eingerichtete Auswahl. Details: FS2020_TESTANLEITUNG.md.
+
 WAS MUSS ICH STARTEN?
 --------------------
 
@@ -50,12 +59,13 @@ Nach einem PC-Neustart oder Beenden von SRS/Bridge den Direktstart erneut nutzen
 Der taegliche Direktstart veraendert keine Flugzeugdateien.
 Kein Windows-Autostart.
 Im Ordner "Programm" muss nichts einzeln angeklickt werden.
-IFE_Eurofighter_SRS_MOD_Anleitung.pdf = Installation und Bedienung (5 Seiten).
+IFE_Eurofighter_SRS_MOD_Anleitung.pdf = bisherige FS2024-Anleitung (5 Seiten).
+FS2020_TESTANLEITUNG.md = Simulator-Auswahl, SimConnect und FS2020-Test.
 README.md = ausfuehrliche Hinweise.
 LICENSE = Nutzungsbedingungen.
 THIRD_PARTY_NOTICE.txt = Hinweise zu Fremdprodukten.
 
-Kompatibilitaet: MSFS 2024, IFE Eurofighter 1.0.9 / 1.0.10, SRS 2.4.1.0.
+Kompatibilitaet: MSFS 2024; MSFS 2020 als neue Testunterstuetzung, IFE Eurofighter 1.0.9 / 1.0.10, SRS 2.4.1.0.
 Inoffizieller Mod, nicht von IndiaFoxtEcho unterstuetzt.
 Repository: https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD
 

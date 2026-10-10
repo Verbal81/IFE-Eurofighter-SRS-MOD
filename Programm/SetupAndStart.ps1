@@ -23,10 +23,36 @@ $data=Join-Path $env:LOCALAPPDATA 'EF-SRS'
 $settingsPath=Join-Path $data 'launcher-v11m4-finalrc2.json'
 $work=Join-Path $data 'v11m4-finalrc2\profile'
 $ps=$windowsPowerShell
+. (Join-Path $base 'runtime\SimulatorSupport.ps1')
+$simulator='2024'
+$savedSettings=$null
 function Json([string]$p){ Get-Content -LiteralPath $p -Raw -Encoding UTF8 | ConvertFrom-Json }
-function SaveSettings([string]$package,[string]$srs){
+function SaveSettings([string]$package,[string]$srs,[string]$simulator){
     [IO.Directory]::CreateDirectory($data)|Out-Null
-    @{package_root=$package;srs_client=$srs}|ConvertTo-Json|Set-Content -LiteralPath $settingsPath -Encoding UTF8
+    $values=@{package_root=$package;srs_client=$srs;simulator=$simulator}
+    if($savedSettings -and (GetSimulatorId $savedSettings) -eq $simulator -and $savedSettings.PSObject.Properties['simconnect_path']){
+        $values.simconnect_path=[string]$savedSettings.simconnect_path
+    }
+    $values|ConvertTo-Json|Set-Content -LiteralPath $settingsPath -Encoding UTF8
+}
+function PickSimulator([string]$initial){
+    $form=New-Object Windows.Forms.Form
+    try{
+        $form.Text='EF-SRS - Simulator waehlen'
+        $form.Width=430;$form.Height=180;$form.StartPosition='CenterScreen'
+        $form.FormBorderStyle='FixedDialog';$form.MaximizeBox=$false;$form.MinimizeBox=$false
+        $label=New-Object Windows.Forms.Label
+        $label.Text='Welchen Simulator moechtest du einrichten?';$label.SetBounds(15,15,390,25)
+        $combo=New-Object Windows.Forms.ComboBox
+        $combo.DropDownStyle='DropDownList';$combo.SetBounds(15,45,380,25)
+        [void]$combo.Items.Add('MSFS 2024');[void]$combo.Items.Add('MSFS 2020 (Testunterstuetzung)')
+        $combo.SelectedIndex=if($initial -eq '2020'){1}else{0}
+        $ok=New-Object Windows.Forms.Button
+        $ok.Text='Weiter';$ok.SetBounds(295,85,100,30);$ok.DialogResult=[Windows.Forms.DialogResult]::OK
+        $form.Controls.AddRange(@($label,$combo,$ok));$form.AcceptButton=$ok
+        if($form.ShowDialog() -ne [Windows.Forms.DialogResult]::OK){throw 'Simulator-Auswahl abgebrochen.'}
+        if($combo.SelectedIndex -eq 1){return '2020'}else{return '2024'}
+    }finally{$form.Dispose()}
 }
 function NormalizePackage([string]$p){
     if (-not $p){return ''}
@@ -62,18 +88,18 @@ function AddInstalledPackagesCandidate($List,[string]$UserCfg){
     }catch{}
 }
 function FindPackage {
+    $spec=GetSimulatorSpec $simulator
     $candidates=New-Object System.Collections.Generic.List[string]
-    if(Test-Path -LiteralPath $settingsPath){try{$x=Json $settingsPath;if($x.package_root){$candidates.Add([string]$x.package_root)}}catch{}}
+    if($savedSettings -and (GetSimulatorId $savedSettings) -eq $simulator -and $savedSettings.PSObject.Properties['package_root']){
+        $candidates.Add([string]$savedSettings.package_root)
+    }
     $pkgRoot=Join-Path $env:LOCALAPPDATA 'Packages'
-    foreach($d in @(Get-ChildItem -LiteralPath $pkgRoot -Directory -Filter 'Microsoft.Limitless_*' -ErrorAction SilentlyContinue)){
+    foreach($d in @(Get-ChildItem -LiteralPath $pkgRoot -Directory -Filter $spec.PackagePattern -ErrorAction SilentlyContinue)){
         $candidates.Add((Join-Path $d.FullName 'LocalCache\Packages\Community\indiafoxtecho-efa'))
         AddInstalledPackagesCandidate $candidates (Join-Path $d.FullName 'LocalCache\UserCfg.opt')
     }
-    foreach($cfg in @(
-        (Join-Path $env:APPDATA 'Microsoft Flight Simulator 2024\UserCfg.opt'),
-        (Join-Path $env:APPDATA 'Microsoft Flight Simulator\UserCfg.opt'),
-        (Join-Path $env:LOCALAPPDATA 'Microsoft Flight Simulator 2024\UserCfg.opt')
-    )){AddInstalledPackagesCandidate $candidates $cfg}
+    foreach($name in $spec.RoamingFolders){AddInstalledPackagesCandidate $candidates (Join-Path $env:APPDATA ($name+'\UserCfg.opt'))}
+    foreach($name in $spec.LocalFolders){AddInstalledPackagesCandidate $candidates (Join-Path $env:LOCALAPPDATA ($name+'\UserCfg.opt'))}
     foreach($p0 in $candidates|Select-Object -Unique){try{$p=NormalizePackage $p0;if(ValidPackage $p){return $p}}catch{}}
     return ''
 }
@@ -94,11 +120,16 @@ function FindSrs {
 }
 try{
     $running=@(Get-Process -ErrorAction SilentlyContinue|Where-Object{$_.ProcessName -match '^(FlightSimulator|FlightSimulator2024|SR-ClientRadio)$'})
-    if($running.Count -gt 0){throw 'Bitte MSFS 2024 und SRS komplett schliessen.'}
+    if($running.Count -gt 0){throw 'Bitte MSFS 2020 / 2024 und SRS komplett schliessen.'}
+    if(Test-Path -LiteralPath $settingsPath){$savedSettings=Json $settingsPath}
+    if($savedSettings){$simulator=GetSimulatorId $savedSettings}
+    if($ChoosePaths -or -not $savedSettings){$simulator=PickSimulator $simulator}
+    $spec=GetSimulatorSpec $simulator
+    Write-Host ('Ausgewaehlter Simulator: '+$spec.Label)
     $package=FindPackage
     $srs=FindSrs
     if($ChoosePaths -or -not (ValidPackage $package)){
-        $picked=PickFolder 'Eurofighter-Ordner indiafoxtecho-efa waehlen. Wenn du versehentlich Community waehlt, wird indiafoxtecho-efa automatisch erkannt.' $package
+        $picked=PickFolder ($spec.Label+': Eurofighter-Ordner indiafoxtecho-efa waehlen. Community wird ebenfalls erkannt.') $package
         $package=NormalizePackage $picked
         if(-not (ValidPackage $package)){throw 'Kein gueltiger indiafoxtecho-efa Paketordner. Bitte NICHT nur Community waehlen, sofern darin indiafoxtecho-efa nicht gefunden wird.'}
     }
@@ -128,7 +159,7 @@ try{
         }
         $srs=$candidate
     }
-    SaveSettings $package $srs
+    SaveSettings $package $srs $simulator
     if(Test-Path -LiteralPath $work){Remove-Item -LiteralPath $work -Recurse -Force}
     New-Item -ItemType Directory -Path (Join-Path $work 'payload') -Force|Out-Null
     Copy-Item -LiteralPath (Join-Path $base 'aircraft\Installer.ps1') -Destination (Join-Path $work 'Installer.ps1')
