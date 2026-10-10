@@ -48,3 +48,9 @@ DCS SimpleRadio Standalone 2.4.1.0
 - Ein gemeinsames Profil; fuer Simulator-Wechsel erneut Pfade waehlen.
 - Gelieferte 1.0.10-XML-Dateien entsprechen exakt dem bekannten gepatchten Profil; Patch-Rezepte unveraendert.
 - Teststatus: kein bestaetigter FS2020-Flugtest. FS2020_TESTANLEITUNG.md beachten.
+
+10.10.2026 - Korrektur der FS2024-SimConnect-Erkennung
+- Fuer FS2024 wieder der bisherige Erkennungsweg: lokal installierte DLL muss vorhanden und lesbar sein; SHA-256 wird geprueft.
+- Die neue generische PE/CLR-Pruefung gilt nur fuer die experimentelle FS2020-Auswahl.
+- Zusaetzlicher Regressionstest verhindert, dass FS2024 erneut durch diese Pruefung blockiert wird.
+- Nicht lesbare oder abgelehnte gefundene Kandidaten werden protokolliert.

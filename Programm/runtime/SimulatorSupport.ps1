@@ -62,3 +62,15 @@ function TestNativeSimConnect([string]$Path) {
         return $true
     } catch { return $false }
 }
+
+function TestSimConnectCandidate([string]$Path, [string]$Simulator) {
+    if ($Simulator -eq '2024') {
+        # Retain the established FS2024 lookup contract. An extra generic PE/CLR
+        # heuristic must not reject the installed internal simulator library.
+        # Readability/hash is checked by the caller; Windows resolves exports
+        # when the bridge actually loads the user's own DLL.
+        return [IO.File]::Exists($Path)
+    }
+    if ($Simulator -eq '2020') { return (TestNativeSimConnect $Path) }
+    throw 'Unbekannte Simulator-Auswahl.'
+}

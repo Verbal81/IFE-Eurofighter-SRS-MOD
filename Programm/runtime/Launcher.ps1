@@ -119,9 +119,12 @@ function FindInstalledSimConnect([string]$Simulator, $Settings) {
     }
     foreach($p in @(GetSimConnectCandidates $Simulator ($appRoots.ToArray()) ($libraries.ToArray()))) { $candidates.Add($p) }
     foreach($candidate in $candidates | Select-Object -Unique) {
-        if(TestNativeSimConnect $candidate) {
-            return [pscustomobject]@{Path=[IO.Path]::GetFullPath($candidate);SHA256=(Hash $candidate);Source=$spec.Label}
-        }
+        try {
+            if(TestSimConnectCandidate $candidate $Simulator) {
+                return [pscustomobject]@{Path=[IO.Path]::GetFullPath($candidate);SHA256=(Hash $candidate);Source=$spec.Label}
+            }
+            if([IO.File]::Exists($candidate)) { Log ('SimConnect-Kandidat abgelehnt fuer '+$spec.Label+': '+$candidate) }
+        } catch { Log ('SimConnect-Kandidat nicht lesbar: '+$candidate+'; '+$_.Exception.Message) }
     }
     [void][Windows.Forms.MessageBox]::Show(
         ($spec.Label+": Native 64-Bit-SimConnect-DLL wurde nicht gefunden.`r`n`r`nBitte SimConnect_internal.dll oder SimConnect.dll aus der eigenen "+$spec.Label+"-Installation auswaehlen. Fuer MSFS 2020 kann die native Datei aus dessen SDK verwendet werden: SimConnect SDK\lib\SimConnect.dll.`r`n`r`nNicht Microsoft.FlightSimulator.SimConnect.dll und nicht eine DLL aus dem anderen Simulator waehlen. Es wird keine Microsoft-DLL mit diesem Mod verteilt."),
@@ -133,7 +136,7 @@ function FindInstalledSimConnect([string]$Simulator, $Settings) {
         $dlg.CheckFileExists=$true
         if($dlg.ShowDialog() -ne [Windows.Forms.DialogResult]::OK){throw 'SimConnect-Auswahl abgebrochen.'}
         $manual=$dlg.FileName
-        Require (TestNativeSimConnect $manual) 'Keine native 64-Bit-SimConnect-DLL. Bitte die passende Datei aus der eigenen Simulator-Installation oder dem zugehoerigen SDK waehlen.'
+        Require (TestSimConnectCandidate $manual $Simulator) 'Keine native 64-Bit-SimConnect-DLL. Bitte die passende Datei aus der eigenen Simulator-Installation oder dem zugehoerigen SDK waehlen.'
         return [pscustomobject]@{Path=[IO.Path]::GetFullPath($manual);SHA256=(Hash $manual);Source=$spec.Label}
     } finally { $dlg.Dispose() }
 }

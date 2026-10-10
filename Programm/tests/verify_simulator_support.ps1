@@ -44,6 +44,9 @@ try{
     Assert (-not (TestNativeSimConnect $dll)) 'Managed wrapper accepted.'
     [IO.File]::WriteAllText($dll,'not a DLL')
     Assert (-not (TestNativeSimConnect $dll)) 'Invalid DLL accepted.'
+    Assert (TestSimConnectCandidate $dll '2024') 'Established MSFS 2024 lookup was incorrectly gated by new PE checks.'
+    Assert (-not (TestSimConnectCandidate $dll '2020')) 'MSFS 2020 native check was bypassed.'
+    Assert (-not (TestSimConnectCandidate (Join-Path $temp 'missing.dll') '2024')) 'Missing MSFS 2024 DLL accepted.'
     Assert (-not (TestNativeSimConnect (Join-Path $temp 'missing.dll'))) 'Missing DLL accepted.'
 }finally{Remove-Item -LiteralPath $temp -Recurse -Force}
 Write-Host 'Simulator settings, separated paths, x64/native checks and PowerShell parsing passed.'

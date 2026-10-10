@@ -29,12 +29,12 @@
     }
   ],
   "files": {
-    "Launcher.ps1": "49c0af254e1cf91ac483e64af397cd4cdedef4e03f3b94311fc7339e96fd62c0",
+    "Launcher.ps1": "a96d70b0c51a986d44fad49909a355947d14024f3e461da6b416802d14d96ca6",
     "RunBridge.ps1": "5c664ac3f9de68e6e8fd1592c17cc77cd9c20a93a1176a2bd023f121e07bc6a9",
     "src/Bridge.cs": "e0aa8cd6a1e5ec9d4f905b28de417a0bba77e00b9978a40de748cf24f9fb0602",
     "src/Link.cs": "249721f99ed4619bd4bfe41df81958f856a991460762f5757f5c22ca22a3bd60",
     "src/SrsHook.cs": "77a530e7e045531e51765cacc8195428560dd5877a09496a290b24a545c3299a",
     "src\\NativeSimConnect.cs": "4e94ad87614ec160b5eaabdeec7e56e4a3d3cd7cf0f6e43a7ef9d6df951b2661",
-    "SimulatorSupport.ps1": "ce78063fd968351bd012af6cbd17fb00637dc389759a21ef3e4ef6cea7b194b0"
+    "SimulatorSupport.ps1": "85969b9a529c0403529723abd176566025cdadf910890870ee7643c252e0ebf5"
   }
 }
