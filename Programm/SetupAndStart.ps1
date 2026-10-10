@@ -126,6 +126,20 @@ try{
     if($ChoosePaths -or -not $savedSettings){$simulator=PickSimulator $simulator}
     $spec=GetSimulatorSpec $simulator
     Write-Host ('Ausgewaehlter Simulator: '+$spec.Label)
+    if($simulator -eq '2020'){
+        $simConnectReady=$false
+        if($savedSettings -and (GetSimulatorId $savedSettings) -eq '2020' -and $savedSettings.PSObject.Properties['simconnect_path']){
+            $simConnectReady=TestNativeSimConnect ([string]$savedSettings.simconnect_path)
+        }
+        if(-not $simConnectReady){
+            $answer=[Windows.Forms.MessageBox]::Show(
+                "FS2020 benoetigt eine native 64-Bit-SimConnect-DLL. Sie ist nicht im Mod enthalten.`r`n`r`nFalls die DLL noch fehlt, zuerst das kostenlose FS2020-SDK (Core) installieren:`r`nFS2020 -> Optionen -> Allgemeine Optionen -> Entwickler -> Entwicklermodus.`r`nOben Help -> SDK Installer (Core).`r`n`r`nBenoetigte Datei im SDK-Ordner:`r`nSimConnect SDK\lib\SimConnect.dll`r`nBeispiel: C:\MSFS SDK\SimConnect SDK\lib\SimConnect.dll`r`n`r`nNicht Microsoft.FlightSimulator.SimConnect.dll waehlen.`r`nFS2020 vor der Mod-Einrichtung wieder schliessen.`r`n`r`nDLL vorhanden: OK zum Fortfahren.`r`nDLL fehlt: Abbrechen, SDK installieren, Einrichtung erneut starten.`r`nWeitere Hilfe: FS2020_TESTANLEITUNG.md im Mod-Ordner.",
+                'FS2020 - Vorbereitung vor der Installation',
+                [Windows.Forms.MessageBoxButtons]::OKCancel,
+                [Windows.Forms.MessageBoxIcon]::Information)
+            if($answer -ne [Windows.Forms.DialogResult]::OK){throw 'Einrichtung abgebrochen. Bitte zuerst die FS2020-SimConnect-DLL bereitstellen. Es wurde kein neuer Flugzeug-Patch installiert.'}
+        }
+    }
     $package=FindPackage
     $srs=FindSrs
     if($ChoosePaths -or -not (ValidPackage $package)){

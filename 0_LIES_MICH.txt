@@ -4,6 +4,19 @@ IFE EUROFIGHTER SRS MOD | By Verbal81
 ZIP zuerst vollstaendig entpacken. Nicht im Archiv starten.
 Den gesamten entpackten Ordner dauerhaft behalten.
 
+FS2020: VOR DER INSTALLATION
+---------------------------
+Eine native 64-Bit-SimConnect-DLL wird benoetigt und ist nicht im Mod enthalten.
+Falls noch nicht vorhanden: zuerst das kostenlose FS2020-SDK (Core) installieren.
+FS2020 starten -> Optionen -> Allgemeine Optionen -> Entwickler -> Entwicklermodus.
+Oben Help -> SDK Installer (Core) -> herunterladen und installieren.
+Die Datei liegt unter dem SDK-Installationsordner:
+SimConnect SDK\lib\SimConnect.dll
+Beispiel: C:\MSFS SDK\SimConnect SDK\lib\SimConnect.dll
+FS2020 danach schliessen. Diese DLL bei der Einrichtung auswaehlen.
+Nicht Microsoft.FlightSimulator.SimConnect.dll aus dem managed-Ordner waehlen.
+FS2024 benoetigt dafuer normalerweise kein SDK.
+
 SIMULATOR WAEHLEN
 -----------------
 MSFS 2020 ist neue Testunterstuetzung; der praktische Funk-Test steht aus.
@@ -59,7 +72,7 @@ Nach einem PC-Neustart oder Beenden von SRS/Bridge den Direktstart erneut nutzen
 Der taegliche Direktstart veraendert keine Flugzeugdateien.
 Kein Windows-Autostart.
 Im Ordner "Programm" muss nichts einzeln angeklickt werden.
-IFE_Eurofighter_SRS_MOD_Anleitung.pdf = bisherige FS2024-Anleitung (5 Seiten).
+IFE_Eurofighter_SRS_MOD_Anleitung.pdf = SDK-Vorbereitung plus FS2024-Anleitung (6 Seiten).
 FS2020_TESTANLEITUNG.md = Simulator-Auswahl, SimConnect und FS2020-Test.
 README.md = ausfuehrliche Hinweise.
 LICENSE = Nutzungsbedingungen.

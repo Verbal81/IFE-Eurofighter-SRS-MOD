@@ -54,3 +54,9 @@ DCS SimpleRadio Standalone 2.4.1.0
 - Die neue generische PE/CLR-Pruefung gilt nur fuer die experimentelle FS2020-Auswahl.
 - Zusaetzlicher Regressionstest verhindert, dass FS2024 erneut durch diese Pruefung blockiert wird.
 - Nicht lesbare oder abgelehnte gefundene Kandidaten werden protokolliert.
+
+10.10.2026 - FS2020-Voraussetzungen sichtbar gemacht
+- SDK-/SimConnect-Vorbereitung vor dem Download in README und Kurzanleitung.
+- PDF auf sechs Seiten erweitert: neue erste Seite fuer FS2020-Vorbereitung.
+- Einrichtung zeigt bei fehlender gespeicherter FS2020-DLL vor dem Patchen die Voraussetzungen mit Abbruchmoeglichkeit.
+- FS2024 benoetigt normalerweise kein SDK; keine neue SDK-Pflicht fuer FS2024.

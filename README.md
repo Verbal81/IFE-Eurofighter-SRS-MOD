@@ -2,13 +2,24 @@
 
 **By Verbal81 · MSFS 2024 / MSFS 2020 (Test) · IFE Eurofighter · SRS**
 
+## Vor dem Download: FS2020-Voraussetzung
+
+**FS2020 braucht eine native 64-Bit-`SimConnect.dll`. Diese ist nicht im Mod enthalten.** Falls du sie noch nicht hast, zuerst das **kostenlose FS2020-SDK (Core)** installieren:
+
+1. FS2020 starten → **Optionen → Allgemeine Optionen → Entwickler → Entwicklermodus einschalten**.
+2. Oben **Help → SDK Installer (Core)** waehlen und das SDK installieren.
+3. Datei im gewaehlten SDK-Ordner bereithalten: **`SimConnect SDK/lib/SimConnect.dll`**, z. B. **`C:/MSFS SDK/SimConnect SDK/lib/SimConnect.dll`**.
+4. FS2020 schliessen, im Mod **MSFS 2020** waehlen und bei der DLL-Abfrage diese Datei auswaehlen. Die Auswahl wird gespeichert.
+
+**FS2024:** Normalerweise kein SDK erforderlich; der Mod verwendet die DLL aus der eigenen FS2024-Installation. Details: [FS2020-Testanleitung](FS2020_TESTANLEITUNG.md) und [offizielle SDK-Anleitung](https://docs.flightsimulator.com/html/Introduction/SDK_Overview.htm).
+
 ## [⬇ ZIP HERUNTERLADEN](https://github.com/Verbal81/IFE-Eurofighter-SRS-MOD/archive/refs/heads/main.zip)
 
 **Neu: [MSFS-2020-Testanleitung](FS2020_TESTANLEITUNG.md)** — Simulator-Auswahl, passende SimConnect-DLL und Wechsel zwischen 2020/2024. FS2020-Funkbetrieb ist noch nicht praktisch bestaetigt.
 
 ## [📖 PDF-ANLEITUNG: INSTALLATION UND BEDIENUNG](IFE_Eurofighter_SRS_MOD_Anleitung.pdf)
 
-Die fünfseitige PDF beschreibt die bisherige FS2024-Ausgabe und enthält Erstinstallation, Update, Desktop-Verknüpfung, täglichen Start, Cockpitbedienung und Wiederherstellung. Sie liegt auch direkt im ZIP. Auf der PDF-Seite bei Bedarf **Download raw file** wählen.
+Die sechsseitige PDF beginnt mit Simulator-Auswahl und FS2020-SDK-Vorbereitung. Die folgenden fünf Seiten beschreiben die bisherige FS2024-Ausgabe und enthalten Erstinstallation, Update, Desktop-Verknüpfung, täglichen Start, Cockpitbedienung und Wiederherstellung. Sie liegt auch direkt im ZIP. Auf der PDF-Seite bei Bedarf **Download raw file** wählen.
 
 **Neu installieren:** `1_EINMALIG_EINRICHTEN.cmd`  
 **Zum Fliegen:** Desktop-Verknuepfung **SRS-Mod starten**  
