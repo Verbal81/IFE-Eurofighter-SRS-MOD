@@ -1,8 +1,8 @@
-# Run with 64-bit Windows PowerShell 5.1. Uses disposable fake DLL headers only.
+﻿# Run with 64-bit Windows PowerShell 5.1. Uses disposable fake DLL headers only.
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
 $root=Split-Path -Parent $PSScriptRoot
-foreach($relative in @('SetupAndStart.ps1','Menu.ps1','runtime\Launcher.ps1','runtime\SimulatorSupport.ps1')){
+foreach($relative in @('SetupAndStart.ps1','Menu.ps1','aircraft\Installer.ps1','runtime\Launcher.ps1','runtime\SimulatorSupport.ps1')){
     $tokens=$null;$errors=$null
     [void][Management.Automation.Language.Parser]::ParseFile((Join-Path $root $relative),[ref]$tokens,[ref]$errors)
     if(@($errors).Count -gt 0){throw ($relative+': '+($errors -join '; '))}
@@ -51,3 +51,22 @@ try{
 }finally{Remove-Item -LiteralPath $temp -Recurse -Force}
 Write-Host 'Simulator settings, separated paths, x64/native checks and PowerShell parsing passed.'
 Write-Host 'This does not validate a running simulator or aircraft radio behavior.'
+
+# Execute the actual installer merge function without patching any aircraft or starting apps.
+$tokens=$null;$errors=$null
+$installerAst=[Management.Automation.Language.Parser]::ParseFile((Join-Path $root 'aircraft\Installer.ps1'),[ref]$tokens,[ref]$errors)
+$merge=$installerAst.Find({param($node) $node -is [Management.Automation.Language.FunctionDefinitionAst] -and $node.Name -eq 'MergeLauncherSettings'},$true)
+Assert ($null -ne $merge) 'Installer settings merge missing.'
+Invoke-Expression $merge.Extent.Text
+foreach($sim in @('2020','2024')){
+    $existing=[pscustomobject]@{package_root='old-aircraft';srs_client='old-srs';simulator=$sim;simconnect_path='C:\SDK\SimConnect.dll';future_option='keep'}
+    $merged=MergeLauncherSettings $existing 'new-aircraft' 'new-srs'
+    $persisted=$merged|ConvertTo-Json|ConvertFrom-Json
+    Assert ($persisted.simulator -eq $sim) 'Installer reset selected simulator.'
+    Assert ($persisted.simconnect_path -eq $existing.simconnect_path) 'Installer lost selected SDK DLL.'
+    Assert ($persisted.future_option -eq 'keep') 'Installer lost another launcher setting.'
+    Assert ($persisted.package_root -eq 'new-aircraft' -and $persisted.srs_client -eq 'new-srs') 'Installer did not update paths.'
+}
+Assert ((MergeLauncherSettings $null 'aircraft' 'srs').simulator -eq '2024') 'Legacy fresh installation default changed.'
+Assert ((MergeLauncherSettings ([pscustomobject]@{package_root='old'}) 'aircraft' 'srs').simulator -eq '2024') 'Legacy saved settings default changed.'
+Write-Host 'Installer preserves simulator and native DLL settings across path updates.'

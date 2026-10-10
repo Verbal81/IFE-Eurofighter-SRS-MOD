@@ -102,6 +102,17 @@ function SaveJson([string]$Path, $Object) {
         else { [IO.File]::Move($temp, $Path) }
     } finally { if ([IO.File]::Exists($temp)) { [IO.File]::Delete($temp) } }
 }
+function MergeLauncherSettings($Existing, [string]$PackageRoot, [string]$SrsClient) {
+    # The aircraft installer owns the paths; preserve the launcher simulator and DLL selection.
+    $values = @{}
+    if ($null -ne $Existing) {
+        foreach ($property in $Existing.PSObject.Properties) { $values[$property.Name] = $property.Value }
+    }
+    $values.package_root = $PackageRoot
+    $values.srs_client = $SrsClient
+    if (-not $values.ContainsKey('simulator')) { $values.simulator = '2024' }
+    return [pscustomobject]$values
+}
 function PickFile([string]$Title, [string]$Filter) {
     $dialog = New-Object System.Windows.Forms.OpenFileDialog
     try {
@@ -404,7 +415,9 @@ try {
     Log ('Patch und Layout erfolgreich verifiziert. Sicherung: ' + $transactionDirectory)
     Log 'DEP-Dokumentrahmen nach Installation: SimBase.Document / AceXML / SimGauge.Gauge geprueft.'
     } else { Log 'Der aktuelle Patch und alle drei Layoutmetadaten sind bereits korrekt installiert. Keine erneute Dateiinstallation.' }
-    SaveJson $settingsPath ([pscustomobject]@{ package_root=$root; srs_client=$SrsClientPath })
+    $launcherSettings = $null
+    if ([IO.File]::Exists($settingsPath)) { $launcherSettings = ReadJson $settingsPath }
+    SaveJson $settingsPath (MergeLauncherSettings $launcherSettings $root $SrsClientPath)
 
     if ($InstallOnly) { Log 'Flugzeugdateien und Pfade eingerichtet. Der v1.1m4-Launcher uebernimmt den Start.'; exit 0 }
 
